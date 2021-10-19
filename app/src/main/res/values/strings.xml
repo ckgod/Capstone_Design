@@ -10,6 +10,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_up">sign up</string>
+    <string name="sign_in">Sign in</string>
     <string name="profile_name_1">Ali Connors</string>
     <string name="profile_image">Profile image</string>
     <string name="user_points">10,000 pts</string>
@@ -35,5 +36,8 @@
     <string name="cd_home">Home</string>
     <string name="cd_sell">Sell</string>
     <string name="cd_profile">Profile</string>
+
+    <string name="k_login">로그인</string>
+    <string name="k_sign_up">회원가입</string>
 
 </resources>
