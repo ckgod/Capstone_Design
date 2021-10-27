@@ -6,8 +6,54 @@
     app:startDestination="@id/sellMain">
 
     <fragment
+        android:id="@+id/selectCategoryFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment" />
+    <fragment
+        android:id="@+id/completeFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment" />
+    <fragment
+        android:id="@+id/sellProductFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_sellProductFragment_to_selectCategoryFragment2"
+            app:destination="@id/selectCategoryFragment" />
+        <action
+            android:id="@+id/action_sellProductFragment_to_onBoardingFragment2"
+            app:destination="@id/onBoardingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_cameraFragment2"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_writeFragment_to_completeFragment2"
+            app:destination="@id/completeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_cameraFragment_to_writeFragment2"
+            app:destination="@id/writeFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/sellMain"
         android:name="com.ckg.appletree.fragment.SellMainFragment"
-        android:label="SellMainFragment"
-        tools:layout="@layout/fragment_sell_main"/>
+        android:label="SellMainFragment">
+        <action
+            android:id="@+id/action_sellMain_to_sellProductFragment"
+            app:destination="@id/sellProductFragment" />
+    </fragment>
 </navigation>

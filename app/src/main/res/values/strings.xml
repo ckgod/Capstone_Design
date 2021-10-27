@@ -39,5 +39,12 @@
 
     <string name="k_login">로그인</string>
     <string name="k_sign_up">회원가입</string>
+    
+    <string name="Mac">Mac</string>
+    <string name="iMac">iMac</string>
+    <string name="iPhone">iPhone</string>
+    <string name="Watch">Watch</string>
+    <string name="iPad">iPad</string>
+    <string name="Etc">Etc</string>
 
 </resources>

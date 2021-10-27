@@ -7,8 +7,35 @@
 
     <fragment
         android:id="@+id/homeMain"
-        android:name="com.ckg.appletree.fragment.HomeMainFragment"
-        android:label="HomeMainFragment"
-        tools:layout="@layout/fragment_home_main"/>
+        android:name="com.ckg.appletree.fragment.home.HomeMainFragment"
+        android:label="HomeMainFragment">
+        <action
+            android:id="@+id/action_homeMain_to_searchFragment"
+            app:destination="@id/searchResultFragment"/>
+        <action
+            android:id="@+id/action_homeMain_to_productListFragment"
+            app:destination="@id/productListFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment"/>
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
 
 </navigation>

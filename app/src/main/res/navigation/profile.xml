@@ -8,7 +8,45 @@
     <fragment
         android:id="@+id/profileMain"
         android:name="com.ckg.appletree.fragment.ProfileMainFragment"
-        android:label="ProfileMainFragment"
-        tools:layout="@layout/fragment_profile_main"/>
+        android:label="ProfileMainFragment">
+        <action
+            android:id="@+id/action_profileMain_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileMain_to_autionListFragment"
+            app:destination="@id/autionListFragment" />
+        <action
+            android:id="@+id/action_profileMain_to_sellingListFragment"
+            app:destination="@id/sellingListFragment" />
+        <action
+            android:id="@+id/action_profileMain_to_isOverFragment"
+            app:destination="@id/isOverFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment"/>
+
+    <fragment
+        android:id="@+id/autionListFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment"/>
+    <fragment
+        android:id="@+id/sellingListFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment"/>
+    <fragment
+        android:id="@+id/isOverFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment">
+        <action
+            android:id="@+id/action_isOverFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:label="TmpFragment"/>
 
 </navigation>

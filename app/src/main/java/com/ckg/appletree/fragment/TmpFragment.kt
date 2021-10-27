@@ -2,27 +2,28 @@ package com.ckg.appletree.fragment
 
 import com.ckg.appletree.R
 import com.ckg.appletree.base.BaseKotlinFragment
-import com.ckg.appletree.databinding.FragmentHomeMainBinding
-import com.ckg.appletree.databinding.FragmentMainBinding
+import com.ckg.appletree.databinding.FragmentTmpBinding
 
-class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
+class TmpFragment() : BaseKotlinFragment<FragmentTmpBinding>() {
     override val layoutResourceId: Int
-        get() = R.layout.fragment_home_main
+        get() = R.layout.fragment_tmp
 
     override fun initStartView() {
+
     }
 
     override fun initDataBinding() {
+
     }
 
     override fun initAfterBinding() {
+
     }
 
     override fun reLoadUI() {
     }
 
     companion object {
-        const val TAG = "HomeMainFragment"
+        const val TAG = "TmpFragment"
     }
-
 }
