@@ -18,13 +18,16 @@
     <item
         android:id="@+id/home"
         android:contentDescription="@string/cd_home"
+        android:icon="@drawable/ic_device"
         android:title="@string/title_home" />
     <item
         android:id="@+id/sell"
         android:contentDescription="@string/cd_sell"
+        android:icon="@drawable/ic_write"
         android:title="@string/title_sell" />
     <item
         android:id="@+id/profile"
         android:contentDescription="@string/cd_profile"
+        android:icon="@drawable/ic_profile"
         android:title="@string/title_profile" />
 </menu>

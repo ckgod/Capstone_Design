@@ -1,16 +1,18 @@
 package com.ckg.appletree.fragment.sign
 
+import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
 import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentSignUpBinding
-import com.ckg.appletree.databinding.FragmentTmpBinding
 
 class SignUpFragment() : BaseKotlinFragment<FragmentSignUpBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_sign_up
 
     override fun initStartView() {
-
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun initDataBinding() {

@@ -26,17 +26,20 @@
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:paddingBottom="27dp"
-            android:clipToPadding="false"
+            android:clipToPadding="true"
             android:background="@color/colorBlack"
-            app:itemTextColor="@color/colorWhite"
-            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
-            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+            app:itemIconTint="@drawable/menu_color"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintTop_toBottomOf="@id/nav_host_fragment_container_in_main_activity"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav"/>
+
+        <!-- 글자만 쓸 떄
+            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+        -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

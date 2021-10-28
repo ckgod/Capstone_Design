@@ -14,6 +14,7 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
     }
 
     override fun initDataBinding() {
+
     }
 
     override fun initAfterBinding() {
