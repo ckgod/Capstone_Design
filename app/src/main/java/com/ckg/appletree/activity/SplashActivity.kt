@@ -1,23 +1,20 @@
 package com.ckg.appletree.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import com.ckg.appletree.R
+import androidx.appcompat.app.AppCompatActivity
+import com.ckg.appletree.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Handler().postDelayed({
-                              // 토큰확인
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, SPLASH_TIME_OUT)
-
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
     }
-    companion object{
-        const val SPLASH_TIME_OUT: Long = 1000
+
+    companion object {
+        const val TAG = "SplashActivity"
     }
 }

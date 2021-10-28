@@ -15,6 +15,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
+import com.ckg.appletree.activity.MainActivity
 import com.ckg.appletree.customview.ProgressDialog
 import com.ckg.appletree.utils.ViewUtils
 
@@ -32,6 +33,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
      * ex) R.layout.activity_sbs_main
      */
     abstract val layoutResourceId: Int
+    open val showBottomSheetFlag = true
 
     /**
      * 레이아웃을 띄운 직후 호출.
@@ -66,6 +68,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         if(!(::binding.isInitialized)) {
+            (requireActivity() as? MainActivity)?.setBottomNavVisible(showBottomSheetFlag)
             binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
             binding.lifecycleOwner = viewLifecycleOwner
             initStartView()

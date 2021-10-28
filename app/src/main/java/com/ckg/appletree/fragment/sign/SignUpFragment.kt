@@ -9,6 +9,9 @@ class SignUpFragment() : BaseKotlinFragment<FragmentSignUpBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_sign_up
 
+    override val showBottomSheetFlag: Boolean
+        get() = false
+
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()

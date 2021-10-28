@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/homeMain"
         android:name="com.ckg.appletree.fragment.home.HomeMainFragment"
-        android:label="HomeMainFragment">
+        android:label="HomeMainFragment"
+        tools:layout="@layout/fragment_home_main">
         <action
             android:id="@+id/action_homeMain_to_searchFragment"
             app:destination="@id/searchResultFragment"/>

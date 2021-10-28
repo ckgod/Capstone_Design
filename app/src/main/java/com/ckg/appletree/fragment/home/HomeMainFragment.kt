@@ -3,6 +3,7 @@ package com.ckg.appletree.fragment.home
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ckg.appletree.R
+import com.ckg.appletree.activity.MainActivity
 import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentHomeMainBinding
 import com.ckg.appletree.databinding.FragmentMainBinding
@@ -16,6 +17,7 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
     lateinit var categoryList: MutableList<CategoryItem>
 
     override fun initStartView() {
+//        (requireActivity() as? MainActivity)?.setupBottomNavigationBar()
         setCategoryItem()
         binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.rvCategory.adapter =
