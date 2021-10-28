@@ -11,12 +11,14 @@
     <!-- common -->
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorPressBlack">#1B1919</color>
     <color name="colorGray">#636060</color>
     <color name="colorDarkGray">#767676</color>
     <color name="colorVeryLightGray">#F9F9F9</color>
     <color name="colorLightGray">#CCCCCC</color>
     <color name="colorFree">#00000000</color>
     <color name="colorNull">@null</color>
+    <color name="colorOffGray">#a7a7a7</color>
     <color name="colorBackGround">#f3f3f3</color>
     <color name="colorSearch">#eeeeef</color>
     <color name="colorSearchText">#88888c</color>

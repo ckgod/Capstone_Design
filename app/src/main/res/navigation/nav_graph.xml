@@ -11,7 +11,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ckg.appletree.fragment.sign.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -19,7 +20,8 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.ckg.appletree.fragment.sign.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_home"
             app:destination="@id/home" />
@@ -27,7 +29,8 @@
     <fragment
         android:id="@+id/splashAct"
         android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment" >
+        android:label="TmpFragment"
+        tools:layout="@layout/fragment_tmp">
         <action
             android:id="@+id/action_splashAct_to_loginFragment"
             app:destination="@id/loginFragment" />

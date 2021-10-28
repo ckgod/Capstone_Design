@@ -47,4 +47,20 @@
     <string name="iPad">iPad</string>
     <string name="Etc">Etc</string>
 
+    <!-- 회원가입 -->
+    <string name="k_email">이메일</string>
+    <string name="k_email_hint">이메일을 입력해주세요.</string>
+    <string name="k_email_cert">인증</string>
+    <string name="k_cert_num">인증번호</string>
+    <string name="k_cert_num_hint">인증번호 입력</string>
+    <string name="k_remind">재전송</string>
+    <string name="k_password">비밀번호</string>
+    <string name="k_password_hint">비밀번호를 입력해주세요.</string>
+    <string name="k_pw_confirm">비밀번호 확인</string>
+    <string name="k_pw_confirm_hint">비밀번호를 확인해주세요.</string>
+    <string name="k_phone_num">전화번호</string>
+    <string name="k_phone_hint">전화번호를 입력해주세요.</string>
+    <string name="k_nick_name">닉네임</string>
+    <string name="k_nick_hint">닉네임을 입력해주세요.</string>
+
 </resources>

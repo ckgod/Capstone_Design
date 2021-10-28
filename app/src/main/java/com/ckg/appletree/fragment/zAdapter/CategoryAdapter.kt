@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ckg.appletree.databinding.ItemCategoryBinding
 import com.ckg.appletree.fragment.zItem.CategoryItem
@@ -24,6 +25,7 @@ class CategoryAdapter(private val activity : Activity, private val context : Con
     inner class CategoryVH(var binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CategoryItem) {
             binding.tvTitle.text = item.name
+            binding.ivIcon.setImageDrawable(ContextCompat.getDrawable(context, item.icon))
         }
     }
 

@@ -13,18 +13,13 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_home_main
 
-    lateinit var categoryList : MutableList<CategoryItem>
+    lateinit var categoryList: MutableList<CategoryItem>
 
     override fun initStartView() {
-        categoryList = mutableListOf()
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.Mac)))
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.iMac)))
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.iPhone)))
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.Watch)))
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.iPad)))
-        categoryList.add(CategoryItem(R.drawable.ic_mac,getString(R.string.Etc)))
-        binding.rvCategory.layoutManager = GridLayoutManager(requireContext(),3)
-        binding.rvCategory.adapter = CategoryAdapter(requireActivity(),requireContext(),categoryList)
+        setCategoryItem()
+        binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvCategory.adapter =
+            CategoryAdapter(requireActivity(), requireContext(), categoryList)
     }
 
     override fun initDataBinding() {
@@ -37,6 +32,17 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
 
     override fun reLoadUI() {
 
+    }
+
+    private fun setCategoryItem() {
+        categoryList = mutableListOf(
+            CategoryItem(R.drawable.ic_mac_black, getString(R.string.Mac)),
+            CategoryItem(R.drawable.ic_imac_black, getString(R.string.iMac)),
+            CategoryItem(R.drawable.ic_iphone_black, getString(R.string.iPhone)),
+            CategoryItem(R.drawable.ic_watch_black, getString(R.string.Watch)),
+            CategoryItem(R.drawable.ic_ipad_black, getString(R.string.iPad)),
+            CategoryItem(R.drawable.ic_etc_black, getString(R.string.Etc))
+        )
     }
 
     companion object {
