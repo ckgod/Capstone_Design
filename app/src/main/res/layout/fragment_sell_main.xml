@@ -9,20 +9,152 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
-
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sell"
-            android:textSize="30dp"
-            android:textColor="@color/colorBlack"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="20dp"/>
+            android:background="@drawable/shadow_top_bar">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_sell_title"
+                android:textColor="@color/colorBlack"
+                android:textSize="18dp"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:id="@+id/tv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_next"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="20dp"
+                android:paddingTop="10dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_category_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ctl_top_bar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리 선택이 있어야함"
+                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginVertical="30dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ctl_category_container"
+            android:background="@color/colorLightGray"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_camera_container"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="@drawable/bg_stroke_black"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_line">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_add_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:backgroundTint="@color/colorLightGray"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="35dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ctl_camera_container"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:id="@+id/tv_ex_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_sell_ex_title"
+                android:textSize="14dp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/tv_ex_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_sell_ex_1"
+                android:textSize="14dp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_ex_title"/>
+            <TextView
+                android:id="@+id/tv_ex_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_sell_ex_2"
+                android:textSize="14dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toStartOf="@id/tv_ex_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_ex_1"/>
+            <TextView
+                android:id="@+id/tv_ex_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/k_sell_ex_3"
+                android:textSize="14dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/noto_sans_medium"
+                android:includeFontPadding="false"
+                app:layout_constraintStart_toStartOf="@id/tv_ex_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_ex_2"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
