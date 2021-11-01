@@ -13,7 +13,9 @@ class SellMainFragment() : BaseKotlinFragment<FragmentSellMainBinding>() {
         binding.ctlCategoryContainer.setOnClickListener {
             findNavController().navigate(SellMainFragmentDirections.actionSellMainToSelectCategoryFragment())
         }
-
+        binding.ctlCameraContainer.setOnClickListener {
+            findNavController().navigate(SellMainFragmentDirections.actionSellMainToOnboardFragment())
+        }
     }
 
     override fun initDataBinding() {

@@ -1,5 +1,6 @@
 package com.ckg.appletree.fragment.sell
 
+import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
 import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentOnboardingBinding
@@ -10,7 +11,9 @@ class OnboardFragment() : BaseKotlinFragment<FragmentOnboardingBinding>() {
         get() = R.layout.fragment_onboarding
 
     override fun initStartView() {
-
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun initDataBinding() {
