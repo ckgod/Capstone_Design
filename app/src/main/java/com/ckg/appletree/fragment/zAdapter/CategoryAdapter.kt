@@ -5,8 +5,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.ckg.appletree.R
 import com.ckg.appletree.databinding.ItemCategoryBinding
+import com.ckg.appletree.fragment.home.HomeMainFragmentDirections
 import com.ckg.appletree.fragment.zItem.CategoryItem
 
 class CategoryAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<CategoryItem>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
@@ -26,11 +29,21 @@ class CategoryAdapter(private val activity : Activity, private val context : Con
         fun bind(item: CategoryItem) {
             binding.tvTitle.text = item.name
             binding.ivIcon.setImageDrawable(ContextCompat.getDrawable(context, item.icon))
+            itemView.setOnClickListener {
+                activity.findNavController(R.id.nav_host_fragment_container_in_main_activity).
+                navigate(HomeMainFragmentDirections.actionHomeMainToProductListFragment(item.name))
+            }
         }
     }
 
     companion object {
         const val TAG = "CategoryAdapter"
+        const val MAC = 1
+        const val IMAC = 2
+        const val IPHONE = 3
+        const val WATCH = 4
+        const val IPAD = 5
+        const val ETC = 6
     }
 
 }

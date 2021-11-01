@@ -38,12 +38,12 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
 
     private fun setCategoryItem() {
         categoryList = mutableListOf(
-            CategoryItem(R.drawable.ic_mac_black, getString(R.string.Mac)),
-            CategoryItem(R.drawable.ic_imac_black, getString(R.string.iMac)),
-            CategoryItem(R.drawable.ic_iphone_black, getString(R.string.iPhone)),
-            CategoryItem(R.drawable.ic_watch_black, getString(R.string.Watch)),
-            CategoryItem(R.drawable.ic_ipad_black, getString(R.string.iPad)),
-            CategoryItem(R.drawable.ic_etc_black, getString(R.string.Etc))
+            CategoryItem(R.drawable.ic_mac_black, getString(R.string.Mac),1),
+            CategoryItem(R.drawable.ic_imac_black, getString(R.string.iMac),2),
+            CategoryItem(R.drawable.ic_iphone_black, getString(R.string.iPhone),3),
+            CategoryItem(R.drawable.ic_watch_black, getString(R.string.Watch),4),
+            CategoryItem(R.drawable.ic_ipad_black, getString(R.string.iPad),5),
+            CategoryItem(R.drawable.ic_etc_black, getString(R.string.Etc),6)
         )
     }
 
