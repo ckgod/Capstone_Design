@@ -38,6 +38,7 @@
     <string name="cd_profile">Profile</string>
 
     <string name="k_login">로그인</string>
+    <string name="k_logout">로그아웃</string>
     <string name="k_sign_up">회원가입</string>
     
     <string name="Mac">Mac</string>
