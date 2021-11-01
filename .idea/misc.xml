@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/bg_stroke_circle.xml" value="0.198" />
         <entry key="app/src/main/res/drawable-v24/button_press_dark.xml" value="0.175" />
         <entry key="app/src/main/res/drawable-v24/circle.xml" value="0.175" />
         <entry key="app/src/main/res/drawable-v24/ic_feedback.xml" value="0.175" />
@@ -15,6 +16,7 @@
         <entry key="app/src/main/res/drawable/bg_rounded_button.xml" value="0.184" />
         <entry key="app/src/main/res/drawable/bg_stroke_black.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/button_press.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/custom_search_bar.xml" value="0.198" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/menu_color.xml" value="0.184" />
         <entry key="app/src/main/res/drawable/purple_frame.xml" value="0.175" />
@@ -22,11 +24,14 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.31567028985507245" />
-        <entry key="app/src/main/res/layout/fragment_home_main.xml" value="0.32766418457031243" />
+        <entry key="app/src/main/res/layout/fragment_home_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_profile_main.xml" value="0.19300911854103345" />
+        <entry key="app/src/main/res/layout/fragment_onboarding.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_profile_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_select_category.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_sell_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_sell_product.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_tmp.xml" value="0.31567028985507245" />

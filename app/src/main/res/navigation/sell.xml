@@ -6,32 +6,9 @@
     app:startDestination="@id/sellMain">
 
     <fragment
-        android:id="@+id/selectCategoryFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment" />
-    <fragment
         android:id="@+id/completeFragment"
         android:name="com.ckg.appletree.fragment.TmpFragment"
         android:label="TmpFragment" />
-    <fragment
-        android:id="@+id/sellProductFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment">
-        <action
-            android:id="@+id/action_sellProductFragment_to_selectCategoryFragment2"
-            app:destination="@id/selectCategoryFragment" />
-        <action
-            android:id="@+id/action_sellProductFragment_to_onBoardingFragment2"
-            app:destination="@id/onBoardingFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/onBoardingFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment">
-        <action
-            android:id="@+id/action_onBoardingFragment_to_cameraFragment2"
-            app:destination="@id/cameraFragment" />
-    </fragment>
     <fragment
         android:id="@+id/writeFragment"
         android:name="com.ckg.appletree.fragment.TmpFragment"
@@ -50,10 +27,36 @@
     </fragment>
     <fragment
         android:id="@+id/sellMain"
-        android:name="com.ckg.appletree.fragment.SellMainFragment"
-        android:label="SellMainFragment">
+        android:name="com.ckg.appletree.fragment.sell.SellMainFragment"
+        android:label="SellMainFragment"
+        tools:layout="@layout/fragment_sell_main">
         <action
-            android:id="@+id/action_sellMain_to_sellProductFragment"
-            app:destination="@id/sellProductFragment" />
+            android:id="@+id/action_sellMain_to_selectCategoryFragment"
+            app:destination="@id/selectCategoryFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"/>
+        <action
+            android:id="@+id/action_sellMain_to_onboardFragment"
+            app:destination="@id/onboardFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/selectCategoryFragment"
+        android:name="com.ckg.appletree.fragment.sell.SelectCategoryFragment"
+        android:label="SelectCategoryFragment"
+        tools:layout="@layout/fragment_select_category"/>
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.ckg.appletree.fragment.sell.OnboardFragment"
+        android:label="OnboardFragment"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboardFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 </navigation>

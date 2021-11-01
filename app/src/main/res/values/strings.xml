@@ -72,5 +72,31 @@
     <string name="k_sell_ex_1">1, [닉네임, 전화번호, 날짜 (YYMMDDHH), 난수] 순서를 잘 지켜주세요!</string>
     <string name="k_sell_ex_2">2. 제품 위에 정보가 적힌 메모지와 함께 밝은 장소에서 촬영 해주세요.</string>
     <string name="k_sell_ex_3">3. 올바르지 않은 정보 및 사진 인식 불가시 재촬영을 요구할 수 있습니다.</string>
+    <string name="k_category_select_title">카테고리 선택</string>
+
+    <!-- 온보딩 -->
+    <string name="k_onboard_title">온보딩</string>
+    <string name="k_onboard_ex_title">상품 확인을 위해\n상품사진과 함께 자신의 정보를 적은 메모지를\n준비해주세요</string>
+    <string name="k_onboard_hint">다음화면에 촬영을 진행합니다.</string>
+    <string name="k_onboard_ex_1">1. 상품과 메모지가 잘 보이도록 놓아주세요. 어두운 바닥에 놓으면 더 잘 인식합니다.</string>
+    <string name="k_onboard_ex_2">2. 사진 영역에 맞추어 카테고리에 맞는 상품으로 촬영하세요.</string>
+    <string name="k_onboard_ex_3">3. 빛 반사에 주의하세요. 정보 확인이 어렵거나 유효하지 않은 사진을 등록할 경우 재촬영을 요구할 수 있습니다.</string>
+    <string name="k_onboard_ex_4">4. 제출시 주변 영역도 포함되니 촬영시 주의해주세요.</string>
+    <string name="k_open_camera">카메라 실행</string>
+
+    <!-- 프로필 -->
+    <string name="k_profile_title">프로필</string>
+    <string name="k_nickname_tmp">닉네임</string>
+    <string name="k_fix_profile">개인정보 수정</string>
+    <string name="k_profile_phone_num">전화번호</string>
+    <string name="k_profile_email">이메일</string>
+    <string name="k_profile_tab_1">참여중인 경매 리스트</string>
+    <string name="k_profile_tab_2">판매중인 상품 리스트</string>
+    <string name="k_profile_tab_3">거래 성사 리스트</string>
+
+    <!-- 검색 -->
+    <string name="k_search_product">상품명 검색</string>
+
+
 
 </resources>

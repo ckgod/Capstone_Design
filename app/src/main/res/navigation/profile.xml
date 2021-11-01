@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/profileMain"
         android:name="com.ckg.appletree.fragment.ProfileMainFragment"
-        android:label="ProfileMainFragment">
+        android:label="ProfileMainFragment"
+        tools:layout="@layout/fragment_profile_main">
         <action
             android:id="@+id/action_profileMain_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />

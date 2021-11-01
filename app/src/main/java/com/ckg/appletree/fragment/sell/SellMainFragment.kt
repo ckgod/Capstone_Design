@@ -1,5 +1,6 @@
-package com.ckg.appletree.fragment
+package com.ckg.appletree.fragment.sell
 
+import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
 import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentSellMainBinding
@@ -9,6 +10,9 @@ class SellMainFragment() : BaseKotlinFragment<FragmentSellMainBinding>() {
         get() = R.layout.fragment_sell_main
 
     override fun initStartView() {
+        binding.ctlCategoryContainer.setOnClickListener {
+            findNavController().navigate(SellMainFragmentDirections.actionSellMainToSelectCategoryFragment())
+        }
 
     }
 
