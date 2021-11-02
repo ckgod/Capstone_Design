@@ -96,7 +96,7 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
 
     @Suppress("DEPRECATION")
     fun setStatusBar(window:Window, view : View, context: Context) {
-        // status bar 투명하게 하기sSSSSfghjk
+        // status bar 투명하게 하기
         view.setPadding(0, ViewUtils.getStatusBarHeight(context),0,0)
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

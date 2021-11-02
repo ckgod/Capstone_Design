@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/start_graph"
     app:startDestination="@id/splashFragment">
-
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.ckg.appletree.fragment.SplashFragment"
@@ -38,6 +37,4 @@
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right"/>
     </fragment>
-
-
 </navigation>
