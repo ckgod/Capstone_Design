@@ -10,61 +10,93 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ctl_search_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingVertical="10dp">
-            <EditText
-                android:id="@+id/et_search"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:background="@drawable/custom_search_bar"
-                android:hint="@string/k_search_product"
-                android:textColorHint="@color/colorSearchText"
-                android:textSize="14dp"
-                android:textColor="@color/colorBlack"
-                android:fontFamily="@font/noto_sans_medium"
-                android:includeFontPadding="false"
-                android:paddingStart="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginHorizontal="10dp"/>
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/ic_search"
-                android:backgroundTint="@color/colorGray"
-                app:layout_constraintTop_toTopOf="@id/et_search"
-                app:layout_constraintBottom_toBottomOf="@id/et_search"
-                app:layout_constraintEnd_toEndOf="@id/et_search"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <ImageView
-            android:id="@+id/iv_advertise"
-            android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_advertise"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ctl_search_container" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_category"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:stateListAnimator="@color/colorNull"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_advertise"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctl_search_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingVertical="10dp">
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/custom_search_bar"
+                        android:hint="@string/k_search_product"
+                        android:textColorHint="@color/colorSearchText"
+                        android:textSize="14dp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/noto_sans_medium"
+                        android:includeFontPadding="false"
+                        android:paddingStart="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginHorizontal="10dp"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="13dp"
+                        android:background="@drawable/ic_search"
+                        android:backgroundTint="@color/colorGray"
+                        app:layout_constraintTop_toTopOf="@id/et_search"
+                        app:layout_constraintBottom_toBottomOf="@id/et_search"
+                        app:layout_constraintEnd_toEndOf="@id/et_search"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_advertise"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_advertise"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ctl_search_container" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:stateListAnimator="@color/colorNull"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_advertise"/>
+                <TextView
+                    android:id="@+id/tv_recent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/k_recent"
+                    android:textSize="22dp"
+                    android:textColor="@color/colorBlack"
+                    android:fontFamily="@font/noto_sans_black"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_category"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_recent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

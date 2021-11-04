@@ -36,6 +36,7 @@
     <string name="cd_home">Home</string>
     <string name="cd_sell">Sell</string>
     <string name="cd_profile">Profile</string>
+    <string name="k_recent">Recent</string>
 
     <string name="k_login">로그인</string>
     <string name="k_logout">로그아웃</string>
