@@ -83,4 +83,7 @@ dependencies {
 
     // note expandable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    //Permission Manager
+    implementation 'gun0912.ted:tedpermission:2.2.2'
 }
