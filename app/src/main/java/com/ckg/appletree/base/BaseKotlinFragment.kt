@@ -68,13 +68,13 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         if(!(::binding.isInitialized)) {
-            (requireActivity() as? MainActivity)?.setBottomNavVisible(showBottomSheetFlag)
             binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
             binding.lifecycleOwner = viewLifecycleOwner
             initStartView()
             initDataBinding()
             initAfterBinding()
         }
+        (requireActivity() as? MainActivity)?.setBottomNavVisible(showBottomSheetFlag)
         reLoadUI()
         return binding.root
     }

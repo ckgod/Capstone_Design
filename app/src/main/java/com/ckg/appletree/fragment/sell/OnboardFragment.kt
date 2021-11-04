@@ -10,9 +10,15 @@ class OnboardFragment() : BaseKotlinFragment<FragmentOnboardingBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_onboarding
 
+    override val showBottomSheetFlag: Boolean
+        get() = false
+
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.btnOpenCamera.setOnClickListener {
+            findNavController().navigate(OnboardFragmentDirections.actionOnboardFragmentToCameraFragment())
         }
     }
 
