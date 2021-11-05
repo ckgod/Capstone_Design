@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.ckg.appletree.databinding.ItemRecentBinding
 import com.ckg.appletree.fragment.zItem.RecentItem
+import com.ckg.appletree.utils.ViewUtils
 
 class RecentAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<RecentItem>) : RecyclerView.Adapter<RecentAdapter.RecentVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentVH {
@@ -27,7 +29,7 @@ class RecentAdapter(private val activity : Activity, private val context : Conte
     inner class RecentVH(var binding: ItemRecentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RecentItem) {
             Glide.with(context).load(item.image)
-                .apply(RequestOptions().transform(CenterCrop()))
+                .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(4f,context).toInt())))
                 .into(binding.ivImage)
         }
     }

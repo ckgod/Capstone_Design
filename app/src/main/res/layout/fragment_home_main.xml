@@ -75,6 +75,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_advertise"/>
+
                 <TextView
                     android:id="@+id/tv_recent"
                     android:layout_width="wrap_content"
