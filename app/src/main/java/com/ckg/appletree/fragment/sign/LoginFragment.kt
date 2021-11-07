@@ -17,6 +17,7 @@ class LoginFragment() : BaseKotlinFragment<FragmentLoginBinding>() {
 
     override fun initStartView() {
         binding.btnLogin.setOnClickListener {
+
             val nextIntent = Intent(requireContext(), MainActivity::class.java)
             startActivity(nextIntent)
             requireActivity().finish()

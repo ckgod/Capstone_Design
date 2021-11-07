@@ -21,6 +21,7 @@ import android.view.TextureView
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.BuildConfig
 import com.ckg.appletree.R
@@ -541,15 +542,10 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                 override fun onCaptureCompleted(session: CameraCaptureSession,
                                                 request: CaptureRequest,
                                                 result: TotalCaptureResult) {
-
-                    /**
-                     * TODO : file OCR 보내기
-                     */
                     val photoUri = file.toUri()
                     uploadImage(photoUri)
-
-                    showCustomToast("saved : $photoUri")
                     Log.d(TAG, file.toString())
+
                     unlockFocus()
                 }
             }
@@ -591,7 +587,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         // Do the real work in an async task, because we need to use the network anyway
         try {
             val textDetectionTask: TextDetectionTask =
-                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap))
+                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this)
             textDetectionTask.execute()
         } catch (e: IOException) {
             Log.d(
@@ -603,7 +599,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
     private class TextDetectionTask internal constructor(
         activity: MainActivity,
-        annotate: Vision.Images.Annotate
+        annotate: Vision.Images.Annotate,
+        val fragment: Fragment
     ) :
         AsyncTask<Any?, Void?, String>() {
         lateinit var mActivityWeakReference: WeakReference<MainActivity>
@@ -632,6 +629,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 //                imageDetail.text = result
                 Log.d(TAG, "ocr result is : $result")
             }
+            (fragment as Camera2Fragment).hideProgress()
         }
 
         private fun convertResponseToString(response: BatchAnnotateImagesResponse): String {
@@ -751,8 +749,6 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
     }
 
-
-
     private fun setAutoFlash(requestBuilder: CaptureRequest.Builder) {
         if (flashSupported) {
             requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
@@ -767,8 +763,6 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         private const val ANDROID_PACKAGE_HEADER = "X-Android-Package"
         private const val MAX_TEXT_RESULTS = 10
         private const val MAX_DIMENSION = 1200
-
-
 
 
         private val ORIENTATIONS = SparseIntArray()
@@ -843,6 +837,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                 findNavController().popBackStack()
             }
             R.id.btn_capture -> {
+                showProgress()
                 Log.d(TAG, "capture button clicked!")
                 lockFocus()
             }
