@@ -8,7 +8,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:background="@drawable/bg_select_category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -16,10 +16,10 @@
             app:layout_constraintBottom_toBottomOf="parent">
             <ImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="150dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/ic_mac"
-                android:scaleType="fitCenter"
+                android:scaleType="centerInside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
