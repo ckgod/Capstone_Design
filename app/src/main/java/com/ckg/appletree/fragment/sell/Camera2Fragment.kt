@@ -1,51 +1,50 @@
 package com.ckg.appletree.fragment.sell
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.ImageFormat
-import android.graphics.Matrix
-import android.graphics.Point
-import android.graphics.RectF
-import android.graphics.SurfaceTexture
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraCaptureSession
-import android.hardware.camera2.CameraCharacteristics
-import android.hardware.camera2.CameraDevice
-import android.hardware.camera2.CameraManager
-import android.hardware.camera2.CameraMetadata
-import android.hardware.camera2.CaptureRequest
-import android.hardware.camera2.CaptureResult
-import android.hardware.camera2.TotalCaptureResult
+import android.graphics.*
+import android.hardware.camera2.*
 import android.media.ImageReader
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
 import android.util.SparseIntArray
-import android.view.LayoutInflater
 import android.view.Surface
 import android.view.TextureView
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
+import com.ckg.appletree.BuildConfig
 import com.ckg.appletree.R
+import com.ckg.appletree.activity.MainActivity
 import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.cameraUtils.*
-import com.ckg.appletree.cameraUtils.ImageSaver
 import com.ckg.appletree.databinding.FragmentCamera2Binding
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
+import com.ckg.appletree.ocrUtils.PackageManagerUtils
+import com.google.api.client.extensions.android.http.AndroidHttp
+import com.google.api.client.googleapis.json.GoogleJsonResponseException
+import com.google.api.client.json.JsonFactory
+import com.google.api.client.json.gson.GsonFactory
+import com.google.api.services.vision.v1.Vision
+import com.google.api.services.vision.v1.VisionRequest
+import com.google.api.services.vision.v1.VisionRequestInitializer
+import com.google.api.services.vision.v1.model.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.Arrays
-import java.util.Collections
+import java.io.IOException
+import java.lang.ref.WeakReference
+import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
+
 
 class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnClickListener{
     override val layoutResourceId: Int
@@ -69,34 +68,11 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         override fun onSurfaceTextureUpdated(texture: SurfaceTexture) = Unit
     }
 
-    /**
-     * ID of the current [CameraDevice].
-     */
     private lateinit var cameraId: String
-
-    /**
-     * An [AutoFitTextureView] for camera preview.
-     */
     private lateinit var textureView: AutoFitTextureView
-
-    /**
-     * A [CameraCaptureSession] for camera preview.
-     */
     private var captureSession: CameraCaptureSession? = null
-
-    /**
-     * A reference to the opened [CameraDevice].
-     */
     private var cameraDevice: CameraDevice? = null
-
-    /**
-     * The [android.util.Size] of camera preview.
-     */
     private lateinit var previewSize: Size
-
-    /**
-     * [CameraDevice.StateCallback] is called when [CameraDevice] changes its state.
-     */
     private val stateCallback = object : CameraDevice.StateCallback() {
 
         override fun onOpened(cameraDevice: CameraDevice) {
@@ -117,70 +93,19 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         }
 
     }
-
-    /**
-     * An additional thread for running tasks that shouldn't block the UI.
-     */
     private var backgroundThread: HandlerThread? = null
-
-    /**
-     * A [Handler] for running tasks in the background.
-     */
     private var backgroundHandler: Handler? = null
-
-    /**
-     * An [ImageReader] that handles still image capture.
-     */
     private var imageReader: ImageReader? = null
-
-    /**
-     * This is the output file for our picture.
-     */
     private lateinit var file: File
-
-    /**
-     * This a callback object for the [ImageReader]. "onImageAvailable" will be called when a
-     * still image is ready to be saved.
-     */
     private val onImageAvailableListener = ImageReader.OnImageAvailableListener {
         backgroundHandler?.post(ImageSaver(it.acquireNextImage(), file))
     }
-
-    /**
-     * [CaptureRequest.Builder] for the camera preview
-     */
     private lateinit var previewRequestBuilder: CaptureRequest.Builder
-
-    /**
-     * [CaptureRequest] generated by [.previewRequestBuilder]
-     */
     private lateinit var previewRequest: CaptureRequest
-
-    /**
-     * The current state of camera state for taking pictures.
-     *
-     * @see .captureCallback
-     */
     private var state = STATE_PREVIEW
-
-    /**
-     * A [Semaphore] to prevent the app from exiting before closing the camera.
-     */
     private val cameraOpenCloseLock = Semaphore(1)
-
-    /**
-     * Whether the current camera device supports Flash or not.
-     */
     private var flashSupported = false
-
-    /**
-     * Orientation of the camera sensor
-     */
     private var sensorOrientation = 0
-
-    /**
-     * A [CameraCaptureSession.CaptureCallback] that handles events related to JPEG capture.
-     */
     private val captureCallback = object : CameraCaptureSession.CaptureCallback() {
 
         private fun process(result: CaptureResult) {
@@ -236,12 +161,6 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
             process(result)
         }
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        view.findViewById<View>(R.id.picture).setOnClickListener(this)
-//        view.findViewById<View>(R.id.info).setOnClickListener(this)
-//        textureView = view.findViewById(R.id.texture)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -595,10 +514,6 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
     }
 
-    /**
-     * Capture a still picture. This method should be called when we get a response in
-     * [.captureCallback] from both [.lockFocus].
-     */
     private fun captureStillPicture() {
         try {
             if (activity == null || cameraDevice == null) return
@@ -626,7 +541,14 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                 override fun onCaptureCompleted(session: CameraCaptureSession,
                                                 request: CaptureRequest,
                                                 result: TotalCaptureResult) {
-                    showCustomToast("saved : $file")
+
+                    /**
+                     * TODO : file OCR 보내기
+                     */
+                    val photoUri = file.toUri()
+                    uploadImage(photoUri)
+
+                    showCustomToast("saved : $photoUri")
                     Log.d(TAG, file.toString())
                     unlockFocus()
                 }
@@ -640,13 +562,177 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         } catch (e: CameraAccessException) {
             Log.e(TAG, e.toString())
         }
-
     }
 
-    /**
-     * Unlock the focus. This method should be called when still image capture sequence is
-     * finished.
-     */
+    fun uploadImage(uri: Uri) {
+        if (uri != null) {
+            try {
+                // scale the image to save on bandwidth
+                val bitmap: Bitmap = scaleBitmapDown(
+                    MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri),
+                    MAX_DIMENSION
+                )
+                callCloudVision(bitmap)
+//                mMainImage.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                Log.d(TAG, "Image picking failed because " + e.localizedMessage)
+//                Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Log.d(TAG, "Image picker gave us a null image.")
+//            Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun callCloudVision(bitmap: Bitmap) {
+        // Switch text to loading
+//        mImageDetails.setText(R.string.loading_message)
+
+        // Do the real work in an async task, because we need to use the network anyway
+        try {
+            val textDetectionTask: TextDetectionTask =
+                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap))
+            textDetectionTask.execute()
+        } catch (e: IOException) {
+            Log.d(
+                TAG, "failed to make API request because of other IOException " +
+                        e.message
+            )
+        }
+    }
+
+    private class TextDetectionTask internal constructor(
+        activity: MainActivity,
+        annotate: Vision.Images.Annotate
+    ) :
+        AsyncTask<Any?, Void?, String>() {
+        lateinit var mActivityWeakReference: WeakReference<MainActivity>
+        lateinit var mRequest: Vision.Images.Annotate
+
+        override fun doInBackground(vararg params: Any?): String {
+            try {
+                Log.d(TAG, "created Cloud Vision request object, sending request")
+                val response = mRequest.execute()
+                return convertResponseToString(response)
+            } catch (e: GoogleJsonResponseException) {
+                Log.d(TAG, "failed to make API request because " + e.content)
+            } catch (e: IOException) {
+                Log.d(
+                    TAG, "failed to make API request because of other IOException " +
+                            e.message
+                )
+            }
+            return "Cloud Vision API request failed. Check logs for details."
+        }
+
+        override fun onPostExecute(result: String) {
+            val activity: MainActivity? = mActivityWeakReference.get()
+            if (activity != null && !activity.isFinishing) {
+//                val imageDetail = activity.findViewById<TextView>(R.id.image_details)
+//                imageDetail.text = result
+                Log.d(TAG, "ocr result is : $result")
+            }
+        }
+
+        private fun convertResponseToString(response: BatchAnnotateImagesResponse): String {
+            val message = StringBuilder("I found these things:\n\n")
+            val texts = response.responses[0].textAnnotations
+            if (texts != null) {
+                message.append(texts[0].description)
+            } else {
+                message.append("nothing")
+            }
+            return message.toString()
+        }
+
+        init {
+            mActivityWeakReference = WeakReference(activity)
+            mRequest = annotate
+        }
+    }
+
+
+    @Throws(IOException::class)
+    private fun prepareAnnotationRequest(bitmap: Bitmap): Vision.Images.Annotate {
+        val httpTransport = AndroidHttp.newCompatibleTransport()
+        val jsonFactory: JsonFactory = GsonFactory.getDefaultInstance()
+        val requestInitializer: VisionRequestInitializer =
+            object : VisionRequestInitializer(CLOUD_VISION_API_KEY) {
+                /**
+                 * We override this so we can inject important identifying fields into the HTTP
+                 * headers. This enables use of a restricted cloud platform API key.
+                 */
+                @Throws(IOException::class)
+                override fun initializeVisionRequest(visionRequest: VisionRequest<*>) {
+                    super.initializeVisionRequest(visionRequest)
+                    val packageName: String = requireContext().packageName
+                    visionRequest.requestHeaders[ANDROID_PACKAGE_HEADER] = packageName
+                    val sig = PackageManagerUtils.getSignature(requireContext().packageManager, packageName)
+                    visionRequest.requestHeaders[ANDROID_CERT_HEADER] = sig
+                }
+            }
+        val builder = Vision.Builder(httpTransport, jsonFactory, null)
+        builder.setVisionRequestInitializer(requestInitializer)
+        val vision = builder.build()
+        val batchAnnotateImagesRequest = BatchAnnotateImagesRequest()
+        batchAnnotateImagesRequest.requests = object : ArrayList<AnnotateImageRequest?>() {
+            init {
+                val annotateImageRequest = AnnotateImageRequest()
+
+                // Add the image
+                val base64EncodedImage = Image()
+                // Convert the bitmap to a JPEG
+                // Just in case it's a format that Android understands but Cloud Vision
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream)
+                val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
+
+                // Base64 encode the JPEG
+                base64EncodedImage.encodeContent(imageBytes)
+                annotateImageRequest.image = base64EncodedImage
+
+                // add the features we want
+                annotateImageRequest.features = object : ArrayList<Feature?>() {
+                    init {
+                        val textDetection = Feature()
+                        textDetection.setType("TEXT_DETECTION")
+                        textDetection.setMaxResults(MAX_TEXT_RESULTS)
+                        add(textDetection)
+                    }
+                }
+
+                // Add the list of one thing to the request
+                add(annotateImageRequest)
+            }
+        }
+        val annotateRequest = vision.images().annotate(batchAnnotateImagesRequest)
+        // Due to a bug: requests to Vision API containing large images fail when GZipped.
+        annotateRequest.disableGZipContent = true
+        Log.d(TAG, "created Cloud Vision request object, sending request")
+        return annotateRequest
+    }
+
+    private fun scaleBitmapDown(bitmap: Bitmap, maxDimension: Int): Bitmap {
+        val originalWidth = bitmap.width
+        val originalHeight = bitmap.height
+        var resizedWidth = maxDimension
+        var resizedHeight = maxDimension
+        if (originalHeight > originalWidth) {
+            resizedHeight = maxDimension
+            resizedWidth =
+                (resizedHeight * originalWidth.toFloat() / originalHeight.toFloat()).toInt()
+        } else if (originalWidth > originalHeight) {
+            resizedWidth = maxDimension
+            resizedHeight =
+                (resizedWidth * originalHeight.toFloat() / originalWidth.toFloat()).toInt()
+        } else if (originalHeight == originalWidth) {
+            resizedHeight = maxDimension
+            resizedWidth = maxDimension
+        }
+        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false)
+    }
+
+
     private fun unlockFocus() {
         try {
             // Reset the auto-focus trigger
@@ -675,10 +761,16 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     }
 
     companion object {
+        private const val CLOUD_VISION_API_KEY: String = BuildConfig.API_KEY
+        const val FILE_NAME = "temp.jpg"
+        private const val ANDROID_CERT_HEADER = "X-Android-Cert"
+        private const val ANDROID_PACKAGE_HEADER = "X-Android-Package"
+        private const val MAX_TEXT_RESULTS = 10
+        private const val MAX_DIMENSION = 1200
 
-        /**
-         * Conversion from screen rotation to JPEG orientation.
-         */
+
+
+
         private val ORIENTATIONS = SparseIntArray()
         private val FRAGMENT_DIALOG = "dialog"
 
@@ -688,63 +780,15 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
             ORIENTATIONS.append(Surface.ROTATION_180, 270)
             ORIENTATIONS.append(Surface.ROTATION_270, 180)
         }
-
-        /**
-         * Tag for the [Log].
-         */
         private val TAG = "Camera2Fragment"
-
-        /**
-         * Camera state: Showing camera preview.
-         */
         private val STATE_PREVIEW = 0
-
-        /**
-         * Camera state: Waiting for the focus to be locked.
-         */
         private val STATE_WAITING_LOCK = 1
-
-        /**
-         * Camera state: Waiting for the exposure to be precapture state.
-         */
         private val STATE_WAITING_PRECAPTURE = 2
-
-        /**
-         * Camera state: Waiting for the exposure state to be something other than precapture.
-         */
         private val STATE_WAITING_NON_PRECAPTURE = 3
-
-        /**
-         * Camera state: Picture was taken.
-         */
         private val STATE_PICTURE_TAKEN = 4
-
-        /**
-         * Max preview width that is guaranteed by Camera2 API
-         */
         private val MAX_PREVIEW_WIDTH = 1920
-
-        /**
-         * Max preview height that is guaranteed by Camera2 API
-         */
         private val MAX_PREVIEW_HEIGHT = 1080
 
-        /**
-         * Given `choices` of `Size`s supported by a camera, choose the smallest one that
-         * is at least as large as the respective texture view size, and that is at most as large as
-         * the respective max size, and whose aspect ratio matches with the specified value. If such
-         * size doesn't exist, choose the largest one that is at most as large as the respective max
-         * size, and whose aspect ratio matches with the specified value.
-         *
-         * @param choices           The list of sizes that the camera supports for the intended
-         *                          output class
-         * @param textureViewWidth  The width of the texture view relative to sensor coordinate
-         * @param textureViewHeight The height of the texture view relative to sensor coordinate
-         * @param maxWidth          The maximum width that can be chosen
-         * @param maxHeight         The maximum height that can be chosen
-         * @param aspectRatio       The aspect ratio
-         * @return The optimal `Size`, or an arbitrary one if none were big enough
-         */
         @JvmStatic private fun chooseOptimalSize(
             choices: Array<Size>,
             textureViewWidth: Int,
@@ -805,14 +849,6 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
             R.id.btn_confirm -> {
                 binding.cardExplain.visibility = View.GONE
             }
-//            R.id.info -> {
-//                if (activity != null) {
-//                    AlertDialog.Builder(activity)
-//                        .setMessage(R.string.intro_message)
-//                        .setPositiveButton(android.R.string.ok, null)
-//                        .show()
-//                }
-//            }
         }
     }
 
