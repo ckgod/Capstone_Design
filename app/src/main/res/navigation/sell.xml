@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.ckg.appletree.fragment.sell.CameraFragment"
+        android:name="com.ckg.appletree.fragment.sell.Camera2Fragment"
         android:label="CameraFragment"
-        tools:layout="@layout/fragment_camera">
+        tools:layout="@layout/fragment_camera2">
         <action
             android:id="@+id/action_cameraFragment_to_writeFragment2"
             app:destination="@id/writeFragment" />
