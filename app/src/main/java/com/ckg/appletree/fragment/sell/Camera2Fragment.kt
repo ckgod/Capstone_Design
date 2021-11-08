@@ -19,6 +19,7 @@ import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -45,7 +46,6 @@ import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
-
 
 class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnClickListener{
     override val layoutResourceId: Int
@@ -628,6 +628,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 //                val imageDetail = activity.findViewById<TextView>(R.id.image_details)
 //                imageDetail.text = result
                 Log.d(TAG, "ocr result is : $result")
+                Toast.makeText(activity, result, Toast.LENGTH_LONG).show()
             }
             (fragment as Camera2Fragment).hideProgress()
         }

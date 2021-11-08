@@ -86,7 +86,7 @@
     <string name="k_onboard_ex_4">4. 제출시 주변 영역도 포함되니 촬영시 주의해주세요.</string>
     <string name="k_open_camera">카메라 실행</string>
     <string name="k_camera_title">상품 등록</string>
-    <string name="k_camera_ex_1"><b>닉네임, 전화번호, 날짜(YYMMDDHH), 난수</b> 순서를 잘 지켜주세요 !</string>
+    <string name="k_camera_ex_1"><b>닉네임, 이메일, 날짜(YYMMDDHH), 난수</b> 순서를 잘 지켜주세요 !</string>
     <string name="k_camera_ex_2">제품 위에 정보가 적힌 메모지와 함께 밝은 장소에서 촬영해주세요.</string>
     <string name="k_camera_ex_3">올바르지 않은 정보, 및 사진 인식 불가시, 재촬영을 요구할 수 있어요.</string>
 

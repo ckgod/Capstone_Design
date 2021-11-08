@@ -37,6 +37,9 @@ class ProductAdapter(private val activity : Activity, private val context : Cont
             Glide.with(context).load(item.image)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,context).toInt())))
                 .into(binding.ivImage)
+            binding.tvProductTitle.text = item.title
+            binding.tvPrice.text = "${item.price}원"
+            binding.tvFixLowerPrice.text = "고정하한가 ${item.fixLower}원"
         }
     }
 
