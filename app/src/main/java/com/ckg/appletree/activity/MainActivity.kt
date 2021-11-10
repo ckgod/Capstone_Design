@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -61,18 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         currentNavController = controller
 //        subscribeBottomNavigation(currentNavController!!)
-    }
-
-    fun setBottomNav() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container_in_main_activity) as NavHostFragment
-        navController = navHostFragment.navController
-
-        val bottomNavigationView = binding.bottomNav
-        bottomNavigationView.setupWithNavController(navController)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeMain, R.id.sellMain, R.id.profileMain)
-        )
     }
 
     fun setBottomNavVisible(flag : Boolean){
