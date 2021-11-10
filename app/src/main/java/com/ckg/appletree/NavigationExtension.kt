@@ -2,7 +2,9 @@ package com.ckg.appletree
 
 
 import android.content.Intent
+import android.os.Build
 import android.util.SparseArray
+import androidx.annotation.RequiresApi
 import androidx.core.util.forEach
 import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
@@ -17,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  * This sample is a workaround until the Navigation Component supports multiple back stacks.
  */
+@RequiresApi(Build.VERSION_CODES.S)
 fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
     fragmentManager: FragmentManager,
@@ -178,7 +181,7 @@ private fun BottomNavigationView.setupItemReselected(
         val navController = selectedFragment.navController
         // Pop the back stack to the start destination of the current navController graph
         navController.popBackStack(
-            navController.graph.startDestination, false
+            navController.graph.startDestinationId, false
         )
     }
 }
