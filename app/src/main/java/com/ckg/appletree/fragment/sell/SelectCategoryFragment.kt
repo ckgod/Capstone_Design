@@ -7,6 +7,7 @@ import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentSelectCategoryBinding
 import com.ckg.appletree.databinding.FragmentTmpBinding
 import com.ckg.appletree.fragment.zAdapter.SelectCategoryAdapter
+import com.ckg.appletree.fragment.zAdapter.SelectCategoryListener
 import com.ckg.appletree.fragment.zItem.SelectCategoryItem
 
 class SelectCategoryFragment() : BaseKotlinFragment<FragmentSelectCategoryBinding>() {
@@ -21,16 +22,23 @@ class SelectCategoryFragment() : BaseKotlinFragment<FragmentSelectCategoryBindin
         }
         setItemList()
         binding.rv.layoutManager = GridLayoutManager(requireContext(),3)
-        binding.rv.adapter = SelectCategoryAdapter(requireActivity(),requireContext(),itemList)
+        binding.rv.adapter = SelectCategoryAdapter(requireActivity(),requireContext(),itemList).apply {
+            setAdapterListener(object : SelectCategoryListener {
+                override fun clickCategory(itemType: String) {
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set("categoryResult", itemType)
+                    findNavController().popBackStack()
+                }
+            })
+        }
     }
 
     fun setItemList() {
         itemList = mutableListOf(SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1),
-            SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1),
-            SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1),
-            SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1),
-            SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1),
-            SelectCategoryItem(R.drawable.ic_mac_black,getString(R.string.Mac),1))
+            SelectCategoryItem(R.drawable.ic_imac_black,getString(R.string.iMac),2),
+            SelectCategoryItem(R.drawable.ic_iphone_black,getString(R.string.iPhone),3),
+            SelectCategoryItem(R.drawable.ic_watch_black,getString(R.string.Watch),4),
+            SelectCategoryItem(R.drawable.ic_ipad_black,getString(R.string.iPad),5),
+            SelectCategoryItem(R.drawable.ic_etc_black,getString(R.string.Etc),6))
     }
 
     override fun initDataBinding() {

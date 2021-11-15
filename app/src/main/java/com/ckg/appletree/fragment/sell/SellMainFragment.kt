@@ -1,5 +1,6 @@
 package com.ckg.appletree.fragment.sell
 
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
 import com.ckg.appletree.base.BaseKotlinFragment
@@ -22,6 +23,11 @@ class SellMainFragment() : BaseKotlinFragment<FragmentSellMainBinding>() {
     }
 
     override fun initAfterBinding() {
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("categoryResult")?.observe(
+            this@SellMainFragment, Observer {
+                binding.tvSelectCategory.text = it
+            }
+        )
     }
 
     override fun reLoadUI() {
