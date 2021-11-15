@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class ApplicationClass : Application() {
-
     override fun onCreate() {
         super.onCreate()
         instance = this
