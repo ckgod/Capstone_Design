@@ -1,4 +1,16 @@
 package com.ckg.appletree.api.model
 
-class LoginResponse {
+import com.google.gson.annotations.SerializedName
+
+class LoginResponse(
+    @SerializedName("code")
+    var code: Int,
+    @SerializedName("data")
+    var data: String?,
+    @SerializedName("msg")
+    var msg: String,
+    @SerializedName("success")
+    var success: Boolean
+) {
+
 }

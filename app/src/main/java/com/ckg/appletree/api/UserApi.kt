@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 class UserApi {
     interface UserApiImpl{
-        @POST("/v1/sign-in")
+        @POST("/v1/login")
         fun postLogin(@Body params: LoginRequest): Observable<LoginResponse>
     }
 }
