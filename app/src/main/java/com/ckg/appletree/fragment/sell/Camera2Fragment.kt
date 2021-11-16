@@ -46,6 +46,7 @@ import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnClickListener{
     override val layoutResourceId: Int
@@ -74,6 +75,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     private var captureSession: CameraCaptureSession? = null
     private var cameraDevice: CameraDevice? = null
     private lateinit var previewSize: Size
+    var sendUri : String? = null
     private val stateCallback = object : CameraDevice.StateCallback() {
 
         override fun onOpened(cameraDevice: CameraDevice) {
@@ -166,7 +168,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        file = File(requireActivity().getExternalFilesDir(null), PIC_FILE_NAME)
+        val rand = Math.random()
+        file = File(requireActivity().getExternalFilesDir(null), PIC_FILE_NAME + rand.toString())
     }
 
     override fun onResume() {
@@ -543,6 +546,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                                                 request: CaptureRequest,
                                                 result: TotalCaptureResult) {
                     val photoUri = file.toUri()
+                    sendUri = photoUri.toString()
                     uploadImage(photoUri)
                     Log.d(TAG, file.toString())
 
@@ -587,7 +591,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         // Do the real work in an async task, because we need to use the network anyway
         try {
             val textDetectionTask: TextDetectionTask =
-                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this)
+                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this, sendUri)
             textDetectionTask.execute()
         } catch (e: IOException) {
             Log.d(
@@ -600,7 +604,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     private class TextDetectionTask internal constructor(
         activity: MainActivity,
         annotate: Vision.Images.Annotate,
-        val fragment: Fragment
+        val fragment: Fragment,
+        val sendString : String?
     ) :
         AsyncTask<Any?, Void?, String>() {
         lateinit var mActivityWeakReference: WeakReference<MainActivity>
@@ -631,6 +636,9 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                 Toast.makeText(activity, result, Toast.LENGTH_LONG).show()
             }
             (fragment as Camera2Fragment).hideProgress()
+            sendString?.let {
+                (fragment as Camera2Fragment).findNavController().navigate(Camera2FragmentDirections.actionCameraFragmentToWriteProductFragment(it))
+            }
         }
 
         private fun convertResponseToString(response: BatchAnnotateImagesResponse): String {
@@ -826,10 +834,13 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     }
 
     override fun initStartView() {
+        val random = Random.nextInt(100)
+        binding.tvRandomNum.text = "난수 : $random"
         binding.btnBack.setOnClickListener(this)
         binding.btnConfirm.setOnClickListener(this)
         binding.btnCapture.setOnClickListener(this)
         textureView = binding.surfaceview
+
     }
 
     override fun onClick(view: View) {
@@ -857,6 +868,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     }
 
     override fun reLoadUI() {
+        sendUri = null
     }
 
 }

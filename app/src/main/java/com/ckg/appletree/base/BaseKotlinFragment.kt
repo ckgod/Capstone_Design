@@ -147,6 +147,9 @@ abstract class BaseKotlinFragment<T : ViewDataBinding> : Fragment() {
         if(progress == null) {
             progress = ProgressDialog(requireContext())
         }
+        if(progress?.isShowing == true){
+            progress?.dismiss()
+        }
         progress?.show()
     }
 

@@ -68,5 +68,8 @@
         <action
             android:id="@+id/action_writeProductFragment_to_completeFragment"
             app:destination="@id/completeFragment" />
+        <argument
+            android:name="photoUri"
+            app:argType="string" />
     </fragment>
 </navigation>
