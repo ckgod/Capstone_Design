@@ -10,21 +10,17 @@
         android:name="com.ckg.appletree.fragment.TmpFragment"
         android:label="TmpFragment" />
     <fragment
-        android:id="@+id/writeFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment">
-        <action
-            android:id="@+id/action_writeFragment_to_completeFragment2"
-            app:destination="@id/completeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/cameraFragment"
         android:name="com.ckg.appletree.fragment.sell.Camera2Fragment"
         android:label="CameraFragment"
         tools:layout="@layout/fragment_camera2">
         <action
-            android:id="@+id/action_cameraFragment_to_writeFragment2"
-            app:destination="@id/writeFragment" />
+            android:id="@+id/action_cameraFragment_to_writeProductFragment"
+            app:destination="@id/writeProductFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <fragment
         android:id="@+id/sellMain"
@@ -63,5 +59,14 @@
             app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@animator/nav_default_pop_enter_anim"
             app:popExitAnim="@animator/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/writeProductFragment"
+        android:name="com.ckg.appletree.fragment.sell.WriteProductFragment"
+        android:label="WriteProductFragment"
+        tools:layout="@layout/fragment_write_product">
+        <action
+            android:id="@+id/action_writeProductFragment_to_completeFragment"
+            app:destination="@id/completeFragment" />
     </fragment>
 </navigation>

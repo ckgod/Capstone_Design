@@ -54,12 +54,12 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
     }
     private fun setRecentItem() {
         recentList = mutableListOf(
-            RecentItem(1, R.drawable.dummy_1),
-            RecentItem(1, R.drawable.dummy_1),
-            RecentItem(1, R.drawable.dummy_1),
-            RecentItem(1, R.drawable.dummy_1),
-            RecentItem(1, R.drawable.dummy_1),
-            RecentItem(1, R.drawable.dummy_1),
+            RecentItem(1, R.drawable.dummy_7),
+            RecentItem(1, R.drawable.dummy_3),
+            RecentItem(1, R.drawable.dummy_2),
+            RecentItem(1, R.drawable.dummy_4),
+            RecentItem(1, R.drawable.dummy_6),
+            RecentItem(1, R.drawable.dummy_5),
             RecentItem(1, R.drawable.dummy_1)
         )
     }

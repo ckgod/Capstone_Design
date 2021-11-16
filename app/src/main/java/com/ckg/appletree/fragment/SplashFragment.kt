@@ -1,5 +1,6 @@
 package com.ckg.appletree.fragment
 
+import android.animation.Animator
 import android.content.Intent
 import android.os.Handler
 import androidx.navigation.findNavController
@@ -16,17 +17,32 @@ class SplashFragment() : BaseKotlinFragment<FragmentSplashBinding>() {
         get() = R.layout.fragment_splash
 
     override fun initStartView() {
-        Handler().postDelayed({
-            val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
-            if(jwtToken == null) {
-                view?.findNavController()?.navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+        binding.splash.addAnimatorListener(object : Animator.AnimatorListener{
+            override fun onAnimationStart(p0: Animator?) {
             }
-            else {
-                val nextIntent = Intent(requireContext(), MainActivity::class.java)
-                startActivity(nextIntent)
-                requireActivity().finish()
+
+            override fun onAnimationEnd(p0: Animator?) {
+                val jwtToken: String? = spToken?.getString(X_ACCESS_TOKEN, null)
+                if(jwtToken == null) {
+                    view?.findNavController()?.navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+                }
+                else {
+                    val nextIntent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(nextIntent)
+                    requireActivity().finish()
+                }
             }
-        }, SPLASH_TIME_OUT)
+
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+
+        })
+//        Handler().postDelayed({
+//
+//        }, SPLASH_TIME_OUT)
     }
 
     override fun initDataBinding() {
@@ -42,6 +58,6 @@ class SplashFragment() : BaseKotlinFragment<FragmentSplashBinding>() {
 
     companion object {
         const val TAG = "SplashFragment"
-        const val SPLASH_TIME_OUT: Long = 1000
+        const val SPLASH_TIME_OUT: Long = 3000
     }
 }

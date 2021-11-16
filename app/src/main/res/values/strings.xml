@@ -67,6 +67,11 @@
 
     <!-- 상품판매 -->
     <string name="k_sell_title">상품 등록</string>
+    <string name="k_title_hint">제목</string>
+    <string name="k_complete_write">작성 완료</string>
+    <string name="k_content_hint">글을 작성해주세요.</string>
+    <string name="k_fix_lower_price">고정 하한가</string>
+    <string name="k_sell_price">즉시 판매가</string>
     <string name="k_close">닫기</string>
     <string name="k_next">다음</string>
     <string name="k_category_choice">카테고리 선택</string>
