@@ -8,6 +8,7 @@ import com.ckg.appletree.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentProductListBinding
 import com.ckg.appletree.databinding.FragmentTmpBinding
 import com.ckg.appletree.fragment.zAdapter.ProductAdapter
+import com.ckg.appletree.fragment.zAdapter.ProductAdapterListener
 import com.ckg.appletree.fragment.zItem.ProductItem
 
 class ProductListFragment() : BaseKotlinFragment<FragmentProductListBinding>() {
@@ -30,7 +31,13 @@ class ProductListFragment() : BaseKotlinFragment<FragmentProductListBinding>() {
             ProductItem(4,R.drawable.dummy_6,"2020 아이맥27 / i9 10코어 / 5700XT / 1TB / 10 Gigabit Ethernet","4,000,000","4,100,000"),
             ProductItem(4,R.drawable.dummy_7,"아이맥 27인치 5K Late 2015 중급형 팝니다","950,000","970,000"))
         binding.rvProduct.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
-        binding.rvProduct.adapter = ProductAdapter(requireActivity(),requireContext(),productList)
+        binding.rvProduct.adapter = ProductAdapter(requireActivity(),requireContext(),productList).apply {
+            setListener(object : ProductAdapterListener{
+                override fun clickItem() {
+                    findNavController().navigate(ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment())
+                }
+            })
+        }
     }
 
     override fun initDataBinding() {

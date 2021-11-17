@@ -19,7 +19,17 @@ import com.ckg.appletree.fragment.zItem.CategoryItem
 import com.ckg.appletree.fragment.zItem.ProductItem
 import com.ckg.appletree.utils.ViewUtils
 
+interface ProductAdapterListener{
+    fun clickItem()
+}
+
 class ProductAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<ProductItem>) : RecyclerView.Adapter<ProductAdapter.ProductVH>() {
+    lateinit var productAdapterListener: ProductAdapterListener
+
+    fun setListener(productAdapterListener: ProductAdapterListener) {
+        this.productAdapterListener = productAdapterListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductVH {
         val itemBinding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductVH(itemBinding)
@@ -40,6 +50,9 @@ class ProductAdapter(private val activity : Activity, private val context : Cont
             binding.tvProductTitle.text = item.title
             binding.tvPrice.text = "${item.price}원"
             binding.tvFixLowerPrice.text = "고정하한가 ${item.fixLower}원"
+            itemView.setOnClickListener {
+                productAdapterListener.clickItem()
+            }
         }
     }
 

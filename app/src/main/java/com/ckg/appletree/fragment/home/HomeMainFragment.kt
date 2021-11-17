@@ -1,5 +1,6 @@
 package com.ckg.appletree.fragment.home
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ckg.appletree.R
@@ -9,6 +10,7 @@ import com.ckg.appletree.databinding.FragmentHomeMainBinding
 import com.ckg.appletree.databinding.FragmentMainBinding
 import com.ckg.appletree.fragment.zAdapter.CategoryAdapter
 import com.ckg.appletree.fragment.zAdapter.RecentAdapter
+import com.ckg.appletree.fragment.zAdapter.RecentAdapterListener
 import com.ckg.appletree.fragment.zItem.CategoryItem
 import com.ckg.appletree.fragment.zItem.RecentItem
 
@@ -27,7 +29,13 @@ class HomeMainFragment() : BaseKotlinFragment<FragmentHomeMainBinding>() {
             CategoryAdapter(requireActivity(), requireContext(), categoryList)
         binding.rvRecent.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.rvRecent.adapter =
-            RecentAdapter(requireActivity(), requireContext(), recentList)
+            RecentAdapter(requireActivity(), requireContext(), recentList).apply {
+                setListener(object : RecentAdapterListener{
+                    override fun clickItem() {
+                        findNavController().navigate(HomeMainFragmentDirections.actionHomeMainToProductDetailFragment())
+                    }
+                })
+            }
     }
 
     override fun initDataBinding() {

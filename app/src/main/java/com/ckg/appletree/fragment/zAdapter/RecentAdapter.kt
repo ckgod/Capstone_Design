@@ -13,7 +13,17 @@ import com.ckg.appletree.databinding.ItemRecentBinding
 import com.ckg.appletree.fragment.zItem.RecentItem
 import com.ckg.appletree.utils.ViewUtils
 
+interface RecentAdapterListener{
+    fun clickItem()
+}
+
 class RecentAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<RecentItem>) : RecyclerView.Adapter<RecentAdapter.RecentVH>() {
+    lateinit var recentAdapterListener: RecentAdapterListener
+
+    fun setListener(recentAdapterListener: RecentAdapterListener) {
+        this.recentAdapterListener = recentAdapterListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentVH {
         val itemBinding = ItemRecentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecentVH(itemBinding)
@@ -31,6 +41,10 @@ class RecentAdapter(private val activity : Activity, private val context : Conte
             Glide.with(context).load(item.image)
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(4f,context).toInt())))
                 .into(binding.ivImage)
+
+            itemView.setOnClickListener {
+                recentAdapterListener.clickItem()
+            }
         }
     }
 
