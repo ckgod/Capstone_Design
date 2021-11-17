@@ -6,10 +6,6 @@
     app:startDestination="@id/sellMain">
 
     <fragment
-        android:id="@+id/completeFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
-        android:label="TmpFragment" />
-    <fragment
         android:id="@+id/cameraFragment"
         android:name="com.ckg.appletree.fragment.sell.Camera2Fragment"
         android:label="CameraFragment"
@@ -65,11 +61,13 @@
         android:name="com.ckg.appletree.fragment.sell.WriteProductFragment"
         android:label="WriteProductFragment"
         tools:layout="@layout/fragment_write_product">
-        <action
-            android:id="@+id/action_writeProductFragment_to_completeFragment"
-            app:destination="@id/completeFragment" />
         <argument
             android:name="photoUri"
             app:argType="string" />
+        <action
+            android:id="@+id/action_writeProductFragment_to_sellMain"
+            app:destination="@id/sellMain"
+            app:popUpTo="@id/sellMain"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

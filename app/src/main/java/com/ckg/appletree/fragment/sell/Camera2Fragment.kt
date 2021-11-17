@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.parser.IntegerParser
 import com.ckg.appletree.BuildConfig
 import com.ckg.appletree.R
 import com.ckg.appletree.activity.MainActivity
@@ -105,6 +106,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     }
     private lateinit var previewRequestBuilder: CaptureRequest.Builder
     private lateinit var previewRequest: CaptureRequest
+    var randomAuth : Int? = null
     private var state = STATE_PREVIEW
     private val cameraOpenCloseLock = Semaphore(1)
     private var flashSupported = false
@@ -591,7 +593,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         // Do the real work in an async task, because we need to use the network anyway
         try {
             val textDetectionTask: TextDetectionTask =
-                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this, sendUri)
+                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this, sendUri, randomAuth)
             textDetectionTask.execute()
         } catch (e: IOException) {
             Log.d(
@@ -605,7 +607,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         activity: MainActivity,
         annotate: Vision.Images.Annotate,
         val fragment: Fragment,
-        val sendString : String?
+        val sendString : String?,
+        val randAuth : Int?
     ) :
         AsyncTask<Any?, Void?, String>() {
         lateinit var mActivityWeakReference: WeakReference<MainActivity>
@@ -629,15 +632,46 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
         override fun onPostExecute(result: String) {
             val activity: MainActivity? = mActivityWeakReference.get()
+            var isAccept = false
             if (activity != null && !activity.isFinishing) {
 //                val imageDetail = activity.findViewById<TextView>(R.id.image_details)
 //                imageDetail.text = result
                 Log.d(TAG, "ocr result is : $result")
-                Toast.makeText(activity, result, Toast.LENGTH_LONG).show()
+                var splitList = result.split('\n')
+                var realSplitList = mutableListOf<String>()
+                for(s in splitList) {
+                    var tmp = ""
+                    for(c in s) {
+                        if(c in '0' .. '9') {
+                            tmp += c
+                        }
+                    }
+                    if(tmp.isNotEmpty()) {
+                        realSplitList.add(tmp)
+                    }
+                }
+                Log.d(TAG, splitList.toString())
+                Log.d(TAG, realSplitList.toString())
+                var randomNum = realSplitList[realSplitList.lastIndex]
+                Log.d(TAG, randomNum)
+                if(randomNum == randAuth.toString()) {
+//                    Toast.makeText(activity, "일치", Toast.LENGTH_LONG).show()
+                    isAccept = true
+                }
+                else {
+                    Log.d(TAG, "ocr is ${randomNum}, auth is $randAuth")
+                }
             }
             (fragment as Camera2Fragment).hideProgress()
             sendString?.let {
                 (fragment as Camera2Fragment).findNavController().navigate(Camera2FragmentDirections.actionCameraFragmentToWriteProductFragment(it))
+            }
+            if(isAccept) {
+                Toast.makeText(activity, "일치", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(activity, "불일치", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity, "정보가 일치하지 않습니다. 사진을 올바르게 찍어주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -834,8 +868,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     }
 
     override fun initStartView() {
-        val random = Random.nextInt(100)
-        binding.tvRandomNum.text = "난수 : $random"
+        randomAuth = Random.nextInt(100)
+        binding.tvRandomNum.text = "난수 : $randomAuth"
         binding.btnBack.setOnClickListener(this)
         binding.btnConfirm.setOnClickListener(this)
         binding.btnCapture.setOnClickListener(this)

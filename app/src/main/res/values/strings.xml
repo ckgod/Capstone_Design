@@ -80,6 +80,8 @@
     <string name="k_sell_ex_2">2. 제품 위에 정보가 적힌 메모지와 함께 밝은 장소에서 촬영 해주세요.</string>
     <string name="k_sell_ex_3">3. 올바르지 않은 정보 및 사진 인식 불가시 재촬영을 요구할 수 있습니다.</string>
     <string name="k_category_select_title">카테고리 선택</string>
+    <string name="k_bidding">입찰하기</string>
+    <string name="k_buy">구매하기</string>
 
     <!-- 온보딩 -->
     <string name="k_onboard_title">온보딩</string>
