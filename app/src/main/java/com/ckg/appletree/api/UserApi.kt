@@ -10,5 +10,8 @@ class UserApi {
     interface UserApiImpl{
         @POST("/v1/login")
         fun postLogin(@Body params: LoginRequest): Observable<LoginResponse>
+
+        @GET("/v1/item/{itemId}")
+        fun getProductDetail(@Path("itemId") itemId : Int) : Observable<ProductDetailResponse>
     }
 }

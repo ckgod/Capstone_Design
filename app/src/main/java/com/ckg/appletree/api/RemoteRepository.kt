@@ -11,4 +11,10 @@ class RemoteRepository {
             UserApi.UserApiImpl::class.java
         ).postLogin(params = loginRequest)
     }
+
+    fun getProductDetail(itemId : Int) : Observable<ProductDetailResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getProductDetail(itemId)
+    }
 }
