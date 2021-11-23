@@ -31,7 +31,7 @@ class CategoryAdapter(private val activity : Activity, private val context : Con
             binding.ivIcon.setImageDrawable(ContextCompat.getDrawable(context, item.icon))
             itemView.setOnClickListener {
                 activity.findNavController(R.id.nav_host_fragment_container_in_main_activity).
-                navigate(HomeMainFragmentDirections.actionHomeMainToProductListFragment(item.name))
+                navigate(HomeMainFragmentDirections.actionHomeMainToProductListFragment(item.name, item.type))
             }
         }
     }

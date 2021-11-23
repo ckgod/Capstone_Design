@@ -17,9 +17,16 @@ class ChatViewModel :ViewModel() {
 
     @SuppressLint("CheckResult")
     fun runStomp(){
-//        stompClient.topic("/").subscribe { topicMessage ->
-//            Log.d("message Recieve", topicMessage.payload)
-//        }
+        stompClient.connect()
+
+//        val headerList = arrayListOf<StompHeader>()
+//        headerList.add(StompHeader("chatRoomId","1"))
+//        headerList.add(StompHeader("sender", "ckgod"))
+//        headerList.add(StompHeader("content", "tesetsetsteset"))
+
+        stompClient.topic("/subscribe/stomp/message").subscribe { topicMessage ->
+            Log.d("message Recieve", topicMessage.payload)
+        }
 
         stompClient.lifecycle().subscribe { lifecycleEvent ->
             when (lifecycleEvent.type) {
@@ -40,23 +47,13 @@ class ChatViewModel :ViewModel() {
             }
         }
 
-        val headerList = arrayListOf<StompHeader>()
-        headerList.add(StompHeader("X-ACCESS-TOKEN",jwtToken))
-        stompClient.connect(headerList)
-//        stompClient.disconnect()
-
-//        headerList.add(StompHeader("username", text.value))
-//        headerList.add(StompHeader("positionType", "1"))
-
-
-//        val data = JSONObject()
-////        data.put("userKey", text.value)
-//        data.put("positionType", "1")
-//        data.put("content", "test")
-//        data.put("messageType", "CHAT")
-//        data.put("destRoomCode", "test0912")
+//            val data = JSONObject()
+//            data.put("chatRoomId", "1")
+//            data.put("sender", "dasdf")
+//            data.put("content", "test")
 //
-//        stompClient.send("/stream/chat/send", data.toString()).subscribe()
+//            stompClient.send("/publish/stomp/message", data.toString()).subscribe()
+
     }
 
     companion object{

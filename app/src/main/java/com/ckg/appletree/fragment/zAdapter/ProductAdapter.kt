@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.ckg.appletree.R
+import com.ckg.appletree.api.model.ProductListResponse
 import com.ckg.appletree.databinding.ItemCategoryBinding
 import com.ckg.appletree.databinding.ItemProductBinding
 import com.ckg.appletree.fragment.home.HomeMainFragmentDirections
@@ -20,10 +22,10 @@ import com.ckg.appletree.fragment.zItem.ProductItem
 import com.ckg.appletree.utils.ViewUtils
 
 interface ProductAdapterListener{
-    fun clickItem()
+    fun clickItem(itemId : Int)
 }
 
-class ProductAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<ProductItem>) : RecyclerView.Adapter<ProductAdapter.ProductVH>() {
+class ProductAdapter(private val activity : Activity, private val context : Context, private val items : MutableList<ProductListResponse.Data>) : RecyclerView.Adapter<ProductAdapter.ProductVH>() {
     lateinit var productAdapterListener: ProductAdapterListener
 
     fun setListener(productAdapterListener: ProductAdapterListener) {
@@ -36,22 +38,24 @@ class ProductAdapter(private val activity : Activity, private val context : Cont
     }
 
     override fun onBindViewHolder(holder: ProductVH, position: Int) {
-        val item: ProductItem = items[position]
+        val item: ProductListResponse.Data = items[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int = items.size
 
     inner class ProductVH(var binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ProductItem) {
-            Glide.with(context).load(item.image)
+        fun bind(item: ProductListResponse.Data) {
+            Glide.with(context).load(item.imageUrl[0])
                 .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(ViewUtils.convertDpToPixel(8f,context).toInt())))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
                 .into(binding.ivImage)
+
             binding.tvProductTitle.text = item.title
-            binding.tvPrice.text = "${item.price}원"
-            binding.tvFixLowerPrice.text = "고정하한가 ${item.fixLower}원"
+            binding.tvPrice.text = "${item.sellPrice}원"
+            binding.tvFixLowerPrice.text = "고정하한가 ${item.limitPrice}원"
             itemView.setOnClickListener {
-                productAdapterListener.clickItem()
+                productAdapterListener.clickItem(item.itemId)
             }
         }
     }

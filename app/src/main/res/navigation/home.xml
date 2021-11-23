@@ -40,6 +40,9 @@
         <argument
             android:name="category_name"
             app:argType="string" />
+        <argument
+            android:name="category_id"
+            app:argType="integer"/>
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment"
@@ -52,7 +55,11 @@
         android:id="@+id/productDetailFragment"
         android:name="com.ckg.appletree.fragment.home.ProductDetailFragment"
         android:label="ProductDetailFragment"
-        tools:layout="@layout/fragment_product_detail"/>
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+    </fragment>
 
 
 </navigation>

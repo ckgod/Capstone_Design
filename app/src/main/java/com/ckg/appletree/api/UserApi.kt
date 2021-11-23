@@ -13,5 +13,8 @@ class UserApi {
 
         @GET("/v1/item/{itemId}")
         fun getProductDetail(@Path("itemId") itemId : Int) : Observable<ProductDetailResponse>
+
+        @GET("/v1/item")
+        fun getProduceList(@Query("categoryId") categoryId : Int) : Observable<ProductListResponse>
     }
 }

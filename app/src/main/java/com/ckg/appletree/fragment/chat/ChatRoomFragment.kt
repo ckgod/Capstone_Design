@@ -9,7 +9,7 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_chat_room
 
-    private val viewModel by lazy{ChatViewModel()}
+    private val viewModel by lazy { ChatViewModel() }
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {

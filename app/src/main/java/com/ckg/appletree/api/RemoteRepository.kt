@@ -17,4 +17,11 @@ class RemoteRepository {
             UserApi.UserApiImpl::class.java
         ).getProductDetail(itemId)
     }
+
+    fun getProductList(categoryId : Int) : Observable<ProductListResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getProduceList(categoryId)
+    }
+
 }

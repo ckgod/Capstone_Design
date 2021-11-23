@@ -3,6 +3,7 @@ package com.ckg.appletree.fragment.home
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -22,12 +23,13 @@ class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>
         get() = false
 
     private val viewModel by lazy { ProductViewModel() }
+    private val safeArgs : ProductDetailFragmentArgs by navArgs()
 
     override fun initStartView() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        viewModel.getProductDetail(1)
+        viewModel.getProductDetail(safeArgs.itemId)
     }
 
     override fun initDataBinding() {
