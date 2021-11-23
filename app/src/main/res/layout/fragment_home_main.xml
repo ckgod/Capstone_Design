@@ -34,6 +34,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/custom_search_bar"
                         android:hint="@string/k_search_product"
+                        android:textCursorDrawable="@drawable/edittext_cursor_color"
                         android:textColorHint="@color/colorSearchText"
                         android:textSize="14dp"
                         android:textColor="@color/colorBlack"
