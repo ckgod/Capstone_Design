@@ -6,7 +6,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.ckg.appletree.fragment.SplashFragment"
+        android:name="com.ckg.appletree.ui.fragment.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -21,12 +21,12 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.ckg.appletree.fragment.sign.SignUpFragment"
+        android:name="com.ckg.appletree.ui.fragment.sign.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.ckg.appletree.fragment.sign.LoginFragment"
+        android:name="com.ckg.appletree.ui.fragment.sign.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action

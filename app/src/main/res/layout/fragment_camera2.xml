@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ctl_top_bar"
             app:layout_constraintBottom_toBottomOf="parent">
-            <com.ckg.appletree.cameraUtils.AutoFitTextureView
+            <com.ckg.appletree.utils.cameraUtils.AutoFitTextureView
                 android:id="@+id/surfaceview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

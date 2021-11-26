@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeMain"
-        android:name="com.ckg.appletree.fragment.home.HomeMainFragment"
+        android:name="com.ckg.appletree.ui.fragment.home.HomeMainFragment"
         android:label="HomeMainFragment"
         tools:layout="@layout/fragment_home_main">
         <action
@@ -30,11 +30,11 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.ckg.appletree.fragment.home.ProductListFragment"
+        android:name="com.ckg.appletree.ui.fragment.home.ProductListFragment"
         android:label="ProductListFragment"
         tools:layout="@layout/fragment_product_list">
         <argument
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.ckg.appletree.fragment.home.ProductDetailFragment"
+        android:name="com.ckg.appletree.ui.fragment.home.ProductDetailFragment"
         android:label="ProductDetailFragment"
         tools:layout="@layout/fragment_product_detail">
         <argument

@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appletree">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.ckg.appletree.ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"
+        <activity android:name="com.ckg.appletree.ui.activity.MainActivity"
             android:screenOrientation="portrait"/>
     </application>
 

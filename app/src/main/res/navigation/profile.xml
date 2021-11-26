@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileMain"
-        android:name="com.ckg.appletree.fragment.ProfileMainFragment"
+        android:name="com.ckg.appletree.ui.fragment.ProfileMainFragment"
         android:label="ProfileMainFragment"
         tools:layout="@layout/fragment_profile_main">
         <action
@@ -33,20 +33,20 @@
 
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
 
     <fragment
         android:id="@+id/autionListFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
     <fragment
         android:id="@+id/sellingListFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
     <fragment
         android:id="@+id/isOverFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment">
         <action
             android:id="@+id/action_isOverFragment_to_chatFragment"
@@ -54,11 +54,11 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.ckg.appletree.fragment.TmpFragment"
+        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
     <fragment
         android:id="@+id/chatRoomFragment"
-        android:name="com.ckg.appletree.fragment.chat.ChatRoomFragment"
+        android:name="com.ckg.appletree.ui.fragment.chat.ChatRoomFragment"
         android:label="ChatRoomFragment"
         tools:layout="@layout/fragment_chat_room"/>
 

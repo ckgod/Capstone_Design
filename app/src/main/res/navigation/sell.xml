@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.ckg.appletree.fragment.sell.Camera2Fragment"
+        android:name="com.ckg.appletree.ui.fragment.sell.Camera2Fragment"
         android:label="CameraFragment"
         tools:layout="@layout/fragment_camera2">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellMain"
-        android:name="com.ckg.appletree.fragment.sell.SellMainFragment"
+        android:name="com.ckg.appletree.ui.fragment.sell.SellMainFragment"
         android:label="SellMainFragment"
         tools:layout="@layout/fragment_sell_main">
         <action
@@ -40,12 +40,12 @@
     </fragment>
     <fragment
         android:id="@+id/selectCategoryFragment"
-        android:name="com.ckg.appletree.fragment.sell.SelectCategoryFragment"
+        android:name="com.ckg.appletree.ui.fragment.sell.SelectCategoryFragment"
         android:label="SelectCategoryFragment"
         tools:layout="@layout/fragment_select_category"/>
     <fragment
         android:id="@+id/onboardFragment"
-        android:name="com.ckg.appletree.fragment.sell.OnboardFragment"
+        android:name="com.ckg.appletree.ui.fragment.sell.OnboardFragment"
         android:label="OnboardFragment"
         tools:layout="@layout/fragment_onboarding">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/writeProductFragment"
-        android:name="com.ckg.appletree.fragment.sell.WriteProductFragment"
+        android:name="com.ckg.appletree.ui.fragment.sell.WriteProductFragment"
         android:label="WriteProductFragment"
         tools:layout="@layout/fragment_write_product">
         <argument
