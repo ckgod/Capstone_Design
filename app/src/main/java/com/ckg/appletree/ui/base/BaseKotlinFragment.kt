@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
 import com.ckg.appletree.ui.activity.MainActivity
-import com.ckg.appletree.customview.ProgressDialog
+import com.ckg.appletree.ui.customview.ProgressDialog
 import com.ckg.appletree.utils.ViewUtils
 
 //import com.ckg.appletree.utils.ViewUtils

@@ -1,4 +1,4 @@
-package com.ckg.appletree.customview
+package com.ckg.appletree.ui.customview
 
 import android.app.Dialog
 import android.content.Context
