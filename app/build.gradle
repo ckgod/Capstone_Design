@@ -30,7 +30,6 @@ android {
         }
         buildTypes.each{
             it.buildConfigField ('String', 'API_KEY', properties['API_KEY'])
-            it.buildConfigField ('String', 'SERVER_URL', properties['URL'])
         }
     }
     compileOptions {
@@ -98,6 +97,5 @@ dependencies {
     implementation 'com.google.http-client:google-http-client-gson:1.23.0' exclude module: 'httpclient'
     implementation 'com.google.apis:google-api-services-vision:v1-rev369-1.23.0'
 
-    //stomp
-    implementation 'com.github.NaikSoftware:StompProtocolAndroid:1.6.6'
+
 }

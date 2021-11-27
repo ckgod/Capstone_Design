@@ -57,15 +57,15 @@ class MessageAdapter(private val activity : Activity, private val context : Cont
             when(item.isReceived) {
                 true -> { // 받은거
                     receiverBinding?.let { binding ->
-                        binding.nameView.text = item.senderName
-                        binding.contentView.text = item.messageContent
+                        binding.nameView.text = "other"
+                        binding.contentView.text = item.content
                         binding.timeView.text = ""
                     }
                 }
                 false -> { // 보낸거
                     senderBinding?.let { binding ->
-                        binding.nameView.text = item.senderName
-                        binding.contentView.text = item.messageContent
+                        binding.nameView.text = "me"
+                        binding.contentView.text = item.content
                         binding.timeView.text = ""
                     }
                 }

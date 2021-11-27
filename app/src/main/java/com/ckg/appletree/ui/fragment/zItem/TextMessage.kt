@@ -4,28 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 
 class TextMessage(
-    @SerializedName("senderName")
-    var senderName: String,
+    @SerializedName("type")
+    var type: String,
 
-    @SerializedName("senderId")
-    var senderId: String,
+    @SerializedName("sessionId")
+    var sessionId: String,
 
-    @SerializedName("receiverId")
-    var receiverId: String,
-
-    @SerializedName("receiverName")
-    var receiverName: String,
-
-    @SerializedName("timeStamp")
-    var timeStamp: Long,
-
-    @SerializedName("contents")
-    var messageContent: String,
+    @SerializedName("content")
+    var content: String,
 
     @SerializedName("isReceived")
     var isReceived: Boolean,
 
-    @SerializedName("isSendComplete")
-    var isSendComplete: Boolean
     ){}
 
