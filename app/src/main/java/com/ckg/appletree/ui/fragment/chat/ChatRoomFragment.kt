@@ -49,14 +49,13 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
 
         binding.btnMeSend.setOnClickListener {
             webSocket.send("{\"type\":\"message\", \"sessionId\": \""+sessionId+"\", \"content\": \"" + binding.etMessage.text.toString() + "\"}");
+            binding.etMessage.setText("")
         }
 
         binding.rvChat.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         binding.rvChat.adapter = MessageAdapter(requireActivity(), requireContext(), messageList)
-
-        makeClient()
     }
 
     fun makeClient() {
@@ -83,6 +82,7 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
 
                         mainActivity.runOnUiThread {
                             binding.rvChat.adapter?.notifyItemChanged(messageList.size-1)
+                            binding.rvChat.scrollToPosition(messageList.size-1)
                         }
 
                     }
@@ -103,6 +103,12 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
     }
 
     override fun reLoadUI() {
+        makeClient()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        webSocket.close(1000, null)
     }
 
     fun setDummy() {
