@@ -68,6 +68,10 @@
             android:id="@+id/action_writeProductFragment_to_sellMain"
             app:destination="@id/sellMain"
             app:popUpTo="@id/sellMain"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"/>
     </fragment>
 </navigation>

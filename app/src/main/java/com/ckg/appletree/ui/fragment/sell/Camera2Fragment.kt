@@ -76,6 +76,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
     private var cameraDevice: CameraDevice? = null
     private lateinit var previewSize: Size
     var sendUri : String? = null
+    var tryCount : Int = 0
     private val stateCallback = object : CameraDevice.StateCallback() {
 
         override fun onOpened(cameraDevice: CameraDevice) {
@@ -592,7 +593,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         // Do the real work in an async task, because we need to use the network anyway
         try {
             val textDetectionTask: TextDetectionTask =
-                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this, sendUri, randomAuth)
+                TextDetectionTask(requireActivity() as MainActivity, prepareAnnotationRequest(bitmap), this, sendUri, randomAuth, tryCount)
             textDetectionTask.execute()
         } catch (e: IOException) {
             Log.d(
@@ -607,7 +608,8 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
         annotate: Vision.Images.Annotate,
         val fragment: Fragment,
         val sendString : String?,
-        val randAuth : Int?
+        val randAuth : Int?,
+        val tryCount : Int,
     ) :
         AsyncTask<Any?, Void?, String>() {
         lateinit var mActivityWeakReference: WeakReference<MainActivity>
@@ -662,16 +664,21 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
                 }
             }
             (fragment as Camera2Fragment).hideProgress()
-            sendString?.let {
-                (fragment as Camera2Fragment).findNavController().navigate(Camera2FragmentDirections.actionCameraFragmentToWriteProductFragment(it))
-            }
-            if(isAccept) {
-                Toast.makeText(activity, "일치", Toast.LENGTH_SHORT).show()
+            if(tryCount != 2) {
+                Toast.makeText(activity, "정보가 일치하지 않습니다. 사진을 올바르게 찍어주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                Toast.makeText(activity, "불일치", Toast.LENGTH_SHORT).show()
-//                Toast.makeText(activity, "정보가 일치하지 않습니다. 사진을 올바르게 찍어주세요.", Toast.LENGTH_SHORT).show()
+                sendString?.let {
+                    (fragment as Camera2Fragment).findNavController().navigate(Camera2FragmentDirections.actionCameraFragmentToWriteProductFragment(it))
+                }
             }
+//            if(isAccept) {
+//                Toast.makeText(activity, "일치", Toast.LENGTH_SHORT).show()
+//            }
+//            else {
+//                Toast.makeText(activity, "불일치", Toast.LENGTH_SHORT).show()
+////                Toast.makeText(activity, "정보가 일치하지 않습니다. 사진을 올바르게 찍어주세요.", Toast.LENGTH_SHORT).show()
+//            }
         }
 
         private fun convertResponseToString(response: BatchAnnotateImagesResponse): String {
@@ -884,6 +891,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
             R.id.btn_capture -> {
                 showProgress()
                 Log.d(TAG, "capture button clicked!")
+                tryCount += 1
                 lockFocus()
             }
             R.id.btn_confirm -> {

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ckg.appletree.R
+import com.ckg.appletree.api.model.WebSocketRequest
 import com.ckg.appletree.ui.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentChatRoomBinding
 import com.ckg.appletree.ui.activity.MainActivity
@@ -23,6 +24,9 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_chat_room
+
+    override val showBottomSheetFlag: Boolean
+        get() = false
 
     private val viewModel by lazy { ChatViewModel() }
     lateinit var messageList: MutableList<TextMessage>
@@ -48,7 +52,8 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
         }
 
         binding.btnMeSend.setOnClickListener {
-            webSocket.send("{\"type\":\"message\", \"sessionId\": \""+sessionId+"\", \"content\": \"" + binding.etMessage.text.toString() + "\"}");
+            webSocket.send(WebSocketRequest("message", sessionId, binding.etMessage.text.toString(), "닉넹").toString())
+//            webSocket.send("{\"type\":\"message\", \"sessionId\": \""+sessionId+"\", \"content\": \"" + binding.etMessage.text.toString() + "\"}");
             binding.etMessage.setText("")
         }
 
@@ -63,7 +68,7 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
 
         val request: Request = Request.Builder()
             //android loopback -> 10.0.2.2 ㅅㅂ.. 2시간짜리
-            .url("ws://15.165.77.58/ws/chat")
+            .url("ws://3.34.227.1/ws/chat")
             .build()
 
         val listener = WebSocketListener().apply {

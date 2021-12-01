@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class RetrofitCreator {
     companion object {
         // 실서버 주소
-        var TEST_URL = "http://15.165.77.58:80/"
+        var TEST_URL = "http://3.34.227.1:80/"
         var REAL_URL = "++"
 
         private fun defaultRetrofit(): Retrofit {

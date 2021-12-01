@@ -11,6 +11,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.ckg.appletree.R
 import com.ckg.appletree.ui.base.BaseKotlinFragment
 import com.ckg.appletree.databinding.FragmentProductDetailBinding
+import com.ckg.appletree.ui.fragment.sell.BottomSheetBid
+import com.ckg.appletree.ui.fragment.sell.BottomSheetBidListener
+import java.text.DecimalFormat
 
 class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>() {
     override val layoutResourceId: Int
@@ -27,6 +30,17 @@ class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>
             findNavController().popBackStack()
         }
         viewModel.getProductDetail(safeArgs.itemId)
+
+        binding.btnBidding.setOnClickListener {
+            var bitBottomSheet = BottomSheetBid().apply {
+                setBottomSheetBidListener(object : BottomSheetBidListener{
+                    override fun clickComplete() {
+                        showCustomToast("입찰이 완료되었습니다.")
+                        dismiss()
+                    }
+                })
+            }.show(childFragmentManager, "TEst")
+        }
     }
 
     override fun initDataBinding() {
@@ -41,11 +55,12 @@ class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>
             else {
                 Log.d(TAG, it.toString())
                 if(it.code == 200) {
+                    val decFormat : DecimalFormat = DecimalFormat("###,###")
                     binding.tvCategory.text = it.data.categoryName
                     binding.tvTitle.text = it.data.title
                     binding.tvContent.text = it.data.content
-                    binding.tvFixPrice.text = it.data.limitPrice.toString()
-                    binding.tvSellPrice.text = it.data.sellPrice.toString()
+                    binding.tvFixPrice.text = decFormat.format(it.data.limitPrice).toString()
+                    binding.tvSellPrice.text = decFormat.format(it.data.sellPrice).toString()
                     Glide.with(requireContext()).load(it.data.imageUrls[0])
                         .apply(RequestOptions().transform(CenterCrop()))
                         .transition(DrawableTransitionOptions.withCrossFade(200))

@@ -18,7 +18,6 @@ class ProductListFragment() : BaseKotlinFragment<FragmentProductListBinding>() {
     private val viewModel by lazy { ProductViewModel() }
     private val safeArgs : ProductListFragmentArgs by navArgs()
 
-
     override fun initStartView() {
         showProgress()
         viewModel.getProductList(safeArgs.categoryId)

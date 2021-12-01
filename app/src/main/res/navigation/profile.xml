@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileMain"
-        android:name="com.ckg.appletree.ui.fragment.ProfileMainFragment"
+        android:name="com.ckg.appletree.ui.fragment.profile.ProfileMainFragment"
         android:label="ProfileMainFragment"
         tools:layout="@layout/fragment_profile_main">
         <action
@@ -17,14 +17,18 @@
             android:id="@+id/action_profileMain_to_autionListFragment"
             app:destination="@id/autionListFragment" />
         <action
-            android:id="@+id/action_profileMain_to_sellingListFragment"
-            app:destination="@id/sellingListFragment" />
-        <action
             android:id="@+id/action_profileMain_to_isOverFragment"
             app:destination="@id/isOverFragment" />
         <action
             android:id="@+id/action_profileMain_to_chatRoomFragment"
             app:destination="@id/chatRoomFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_profileMain_to_sellingListFragment"
+            app:destination="@id/sellingListFragment"
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
@@ -38,10 +42,6 @@
 
     <fragment
         android:id="@+id/autionListFragment"
-        android:name="com.ckg.appletree.ui.fragment.TmpFragment"
-        android:label="TmpFragment"/>
-    <fragment
-        android:id="@+id/sellingListFragment"
         android:name="com.ckg.appletree.ui.fragment.TmpFragment"
         android:label="TmpFragment"/>
     <fragment
@@ -61,5 +61,10 @@
         android:name="com.ckg.appletree.ui.fragment.chat.ChatRoomFragment"
         android:label="ChatRoomFragment"
         tools:layout="@layout/fragment_chat_room"/>
+    <fragment
+        android:id="@+id/sellingListFragment"
+        android:name="com.ckg.appletree.ui.fragment.profile.SellingListFragment"
+        android:label="SellingListFragment"
+        tools:layout="@layout/fragment_selling_list"/>
 
 </navigation>

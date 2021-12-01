@@ -1,4 +1,4 @@
-package com.ckg.appletree.ui.fragment
+package com.ckg.appletree.ui.fragment.profile
 
 import androidx.navigation.fragment.findNavController
 import com.ckg.appletree.R
@@ -12,6 +12,9 @@ class ProfileMainFragment() : BaseKotlinFragment<FragmentProfileMainBinding>() {
     override fun initStartView() {
         binding.tvTab1.setOnClickListener{
             findNavController().navigate(ProfileMainFragmentDirections.actionProfileMainToChatRoomFragment())
+        }
+        binding.tvTab2.setOnClickListener {
+            findNavController().navigate(ProfileMainFragmentDirections.actionProfileMainToSellingListFragment())
         }
     }
 

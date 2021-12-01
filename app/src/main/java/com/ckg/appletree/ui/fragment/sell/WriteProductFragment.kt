@@ -1,6 +1,7 @@
 package com.ckg.appletree.ui.fragment.sell
 
 import android.annotation.SuppressLint
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -30,7 +31,12 @@ class WriteProductFragment() : BaseKotlinFragment<FragmentWriteProductBinding>()
 
     override fun initStartView() {
         binding.btnComplete.setOnClickListener {
-            findNavController().navigate(WriteProductFragmentDirections.actionWriteProductFragmentToSellMain())
+            showProgress()
+            Handler().postDelayed({
+                hideProgress()
+                findNavController().navigate(WriteProductFragmentDirections.actionWriteProductFragmentToSellMain())
+                showCustomToast("상품 등록이 완료되었습니다.")
+            }, 1500)
         }
         decimalFormat = DecimalFormat("#,###")
         decimalFormat2 = DecimalFormat("#,###")
