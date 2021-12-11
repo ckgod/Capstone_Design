@@ -47,10 +47,12 @@
         <entry key="app/src/main/res/layout/fragment_selling_list.xml" value="0.30117753623188404" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.31567028985507245" />
+        <entry key="app/src/main/res/layout/fragment_success_bid.xml" value="0.30117753623188404" />
         <entry key="app/src/main/res/layout/fragment_tmp.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_write_product.xml" value="0.30117753623188404" />
         <entry key="app/src/main/res/layout/home_main.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_chat_room.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_recent.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_select_category.xml" value="0.5" />

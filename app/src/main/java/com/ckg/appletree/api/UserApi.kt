@@ -16,5 +16,8 @@ class UserApi {
 
         @GET("/v1/item")
         fun getProduceList(@Query("categoryId") categoryId : Int) : Observable<ProductListResponse>
+
+        @GET("/v1/chat")
+        fun getChatRoomList() : Observable<ChatRoomListResponse>
     }
 }

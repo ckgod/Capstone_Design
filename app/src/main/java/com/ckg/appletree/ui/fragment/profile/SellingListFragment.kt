@@ -44,7 +44,7 @@ class SellingListFragment() : BaseKotlinFragment<FragmentSellingListBinding>() {
                     binding.rvProduct.adapter = ProductAdapter(requireActivity(),requireContext(),it.list).apply {
                         setListener(object : ProductAdapterListener {
                             override fun clickItem(itemId : Int) {
-
+                                findNavController().navigate(SellingListFragmentDirections.actionSellingListFragmentToProductDetailFragment(itemId))
                             }
                         })
                     }

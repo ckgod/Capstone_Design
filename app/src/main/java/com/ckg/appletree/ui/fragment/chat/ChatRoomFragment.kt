@@ -3,6 +3,7 @@ package com.ckg.appletree.ui.fragment.chat
 import android.content.Context
 import android.util.Log
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ckg.appletree.R
 import com.ckg.appletree.api.model.WebSocketRequest
@@ -28,11 +29,14 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
     override val showBottomSheetFlag: Boolean
         get() = false
 
+    private val safeArgs : ChatRoomFragmentArgs by navArgs()
+
     private val viewModel by lazy { ChatViewModel() }
     lateinit var messageList: MutableList<TextMessage>
     private lateinit var client: OkHttpClient
     private lateinit var webSocket: WebSocket
     private lateinit var sessionId: String
+    private lateinit var nickName: String
 
     lateinit var mainActivity: MainActivity
 
@@ -45,15 +49,16 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
 
 
     override fun initStartView() {
+        binding.tvTitle.text = safeArgs.nickName
         messageList = mutableListOf()
+        nickName = safeArgs.nickName
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
 
         binding.btnMeSend.setOnClickListener {
-            webSocket.send(WebSocketRequest("message", sessionId, binding.etMessage.text.toString(), "닉넹").toString())
-//            webSocket.send("{\"type\":\"message\", \"sessionId\": \""+sessionId+"\", \"content\": \"" + binding.etMessage.text.toString() + "\"}");
+            webSocket.send("{\"type\":\"message\", \"sessionId\": \""+sessionId+"\",\"nickname\": \"" + nickName + "\", \"content\": \"" + binding.etMessage.text.toString() + "\"  }");
             binding.etMessage.setText("")
         }
 
@@ -77,13 +82,14 @@ class ChatRoomFragment() : BaseKotlinFragment<FragmentChatRoomBinding>() {
                     var type = JSONObject(text).getString("type")
                     var mSessionId = JSONObject(text).getString("sessionId")
                     var content = JSONObject(text).getString("content")
+                    var nickName = JSONObject(text).getString("nickname")
 
                     if(type.equals("established")){
                         sessionId = mSessionId
                     } else  {
                         Log.d("ChatRoomFragment:", "mSessionId: " + mSessionId +" sessionId: " + sessionId)
-                        if(mSessionId.equals(sessionId)) messageList.add(TextMessage(type,mSessionId,content,false))
-                        else messageList.add(TextMessage(type,mSessionId,content,true))
+                        if(mSessionId.equals(sessionId)) messageList.add(TextMessage(type,mSessionId,content,false, nickName))
+                        else messageList.add(TextMessage(type,mSessionId,content,true, nickName))
 
                         mainActivity.runOnUiThread {
                             binding.rvChat.adapter?.notifyItemChanged(messageList.size-1)

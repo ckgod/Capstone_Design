@@ -3,6 +3,7 @@ package com.ckg.appletree.ui.fragment.profile
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ckg.appletree.api.model.ChatRoomListResponse
 import com.ckg.appletree.api.repository.RemoteRepository
 import com.ckg.appletree.api.model.ProductDetailResponse
 import com.ckg.appletree.api.model.ProductListResponse
@@ -50,7 +51,23 @@ class ProfileViewModel : ViewModel() {
         )
     }
 
+    private var _chatRoomListResponse : MutableLiveData<ChatRoomListResponse> = MutableLiveData()
+    val chatRoomListResponse get() = _chatRoomListResponse
 
+    fun getRoomList(){
+        CompositeDisposable().add(
+            remoteRepository.getChatRoomList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+                        chatRoomListResponse.postValue(response)
+                    }, { throwable ->
+                        Log.d(TAG,"throwable.localizedMessage : ${throwable.localizedMessage}")
+                        chatRoomListResponse.postValue(null)
+                    })
+        )
+    }
 
     companion object{
         const val TAG = "ProductViewModel"

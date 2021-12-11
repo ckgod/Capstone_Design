@@ -16,5 +16,8 @@ class TextMessage(
     @SerializedName("isReceived")
     var isReceived: Boolean,
 
+    @SerializedName("nickname")
+    var nickname: String,
+
     ){}
 

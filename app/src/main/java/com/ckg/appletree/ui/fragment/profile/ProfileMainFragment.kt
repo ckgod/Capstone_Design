@@ -10,8 +10,8 @@ class ProfileMainFragment() : BaseKotlinFragment<FragmentProfileMainBinding>() {
         get() = R.layout.fragment_profile_main
 
     override fun initStartView() {
-        binding.tvTab1.setOnClickListener{
-            findNavController().navigate(ProfileMainFragmentDirections.actionProfileMainToChatRoomFragment())
+        binding.tvTab3.setOnClickListener{
+            findNavController().navigate(ProfileMainFragmentDirections.actionProfileMainToSuccessBidFragment())
         }
         binding.tvTab2.setOnClickListener {
             findNavController().navigate(ProfileMainFragmentDirections.actionProfileMainToSellingListFragment())

@@ -33,6 +33,13 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_profileMain_to_successBidFragment"
+            app:destination="@id/successBidFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
 
     <fragment
@@ -60,11 +67,63 @@
         android:id="@+id/chatRoomFragment"
         android:name="com.ckg.appletree.ui.fragment.chat.ChatRoomFragment"
         android:label="ChatRoomFragment"
-        tools:layout="@layout/fragment_chat_room"/>
+        tools:layout="@layout/fragment_chat_room">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="sellerNickName"
+            app:argType="string" />
+        <argument
+            android:name="nickName"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/sellingListFragment"
         android:name="com.ckg.appletree.ui.fragment.profile.SellingListFragment"
         android:label="SellingListFragment"
-        tools:layout="@layout/fragment_selling_list"/>
+        tools:layout="@layout/fragment_selling_list">
+        <action
+            android:id="@+id/action_sellingListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/successBidFragment"
+        android:name="com.ckg.appletree.ui.fragment.profile.SuccessBidFragment"
+        android:label="SuccessBidFragment"
+        tools:layout="@layout/fragment_success_bid">
+        <action
+            android:id="@+id/action_successBidFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.ckg.appletree.ui.fragment.home.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_profileMain"
+            app:destination="@id/profileMain"
+            app:popUpTo="@id/profileMain"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left" />
+    </fragment>
 
 </navigation>

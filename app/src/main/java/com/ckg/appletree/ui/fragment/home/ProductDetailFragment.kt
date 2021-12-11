@@ -1,6 +1,7 @@
 package com.ckg.appletree.ui.fragment.home
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -41,6 +42,10 @@ class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>
                 })
             }.show(childFragmentManager, "TEst")
         }
+        binding.btnEndOction.setOnClickListener {
+            showCustomToast("경매가 종료되었습니다.")
+            findNavController().popBackStack()
+        }
     }
 
     override fun initDataBinding() {
@@ -65,6 +70,14 @@ class ProductDetailFragment() : BaseKotlinFragment<FragmentProductDetailBinding>
                         .apply(RequestOptions().transform(CenterCrop()))
                         .transition(DrawableTransitionOptions.withCrossFade(200))
                         .into(binding.ivImage)
+                    if(it.data.seller) {
+                        binding.btnBidding.visibility = View.GONE
+                        binding.btnEndOction.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.btnBidding.visibility = View.VISIBLE
+                        binding.btnEndOction.visibility = View.GONE
+                    }
                 }
             }
         })

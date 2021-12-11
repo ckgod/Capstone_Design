@@ -875,7 +875,7 @@ class Camera2Fragment() : BaseKotlinFragment<FragmentCamera2Binding>(), View.OnC
 
     override fun initStartView() {
         randomAuth = Random.nextInt(100)
-        binding.tvRandomNum.text = "난수 : $randomAuth"
+        binding.tvRandomNum.text = "난수 : 47"
         binding.btnBack.setOnClickListener(this)
         binding.btnConfirm.setOnClickListener(this)
         binding.btnCapture.setOnClickListener(this)
