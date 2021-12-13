@@ -30,4 +30,10 @@ class RemoteRepository {
         ).getChatRoomList()
     }
 
+    fun getSellingList() : Observable<ProductListResponse> {
+        return RetrofitCreator.create(
+            UserApi.UserApiImpl::class.java
+        ).getSellingList()
+    }
+
 }

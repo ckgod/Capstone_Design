@@ -36,9 +36,9 @@ class ProfileViewModel : ViewModel() {
     private var _productListResponse : MutableLiveData<ProductListResponse> = MutableLiveData()
     val productListResponse get() = _productListResponse
 
-    fun getProductList(categoryId : Int) {
+    fun getSellingList() {
         CompositeDisposable().add(
-            remoteRepository.getProductList(categoryId)
+            remoteRepository.getSellingList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

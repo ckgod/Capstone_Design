@@ -19,5 +19,8 @@ class UserApi {
 
         @GET("/v1/chat")
         fun getChatRoomList() : Observable<ChatRoomListResponse>
+
+        @GET("/v1/user/on_sale")
+        fun getSellingList() : Observable<ProductListResponse>
     }
 }

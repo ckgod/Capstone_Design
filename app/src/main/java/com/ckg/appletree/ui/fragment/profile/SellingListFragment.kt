@@ -24,7 +24,7 @@ class SellingListFragment() : BaseKotlinFragment<FragmentSellingListBinding>() {
             findNavController().popBackStack()
         }
         showProgress()
-        viewModel.getProductList(5)
+        viewModel.getSellingList()
     }
 
     override fun initDataBinding() {

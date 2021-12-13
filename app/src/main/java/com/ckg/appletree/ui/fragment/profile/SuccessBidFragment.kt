@@ -1,6 +1,7 @@
 package com.ckg.appletree.ui.fragment.profile
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ckg.appletree.R
 import com.ckg.appletree.databinding.FragmentSuccessBidBinding
@@ -15,6 +16,9 @@ class SuccessBidFragment() : BaseKotlinFragment<FragmentSuccessBidBinding>() {
     private val viewModel by lazy { ProfileViewModel() }
 
     override fun initStartView() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         showProgress()
         viewModel.getRoomList()
     }
